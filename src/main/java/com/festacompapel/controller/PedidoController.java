@@ -24,7 +24,7 @@ import com.festacompapel.repositry.PedidoRepository;
 import com.festacompapel.repositry.ProdutoRepository;
 
 @Controller
-@SessionAttributes(value = { "clientes", "produtos", "carrinho"})
+@SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })
 public class PedidoController {
 
 	public static final String FORM_PEDIDO = "pedido/form-pedido";
@@ -41,19 +41,22 @@ public class PedidoController {
 
 	List<Produto> carrinho = new ArrayList<Produto>();
 
+	double valorTotal = 0;
+	
 	@RequestMapping(value = "/form-pedido", method = RequestMethod.GET)
 	public ModelAndView getFormulario(Pedido pedido) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
 		modelAndView.addObject("clientes", clienteRepository.findAll());
 		modelAndView.addObject("produtos", produtoRepository.findAll());
 		modelAndView.addObject("carrinho", this.carrinho);
+		modelAndView.addObject("valorTotal", valorTotal);
 		modelAndView.addObject("pedido", pedido);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/form-pedido", method = RequestMethod.POST)
-	public ModelAndView adicionaAoPedido(@SessionAttribute("carrinho") List<Produto> carrinho,
-			@ModelAttribute("valorTotal") double valorTotalModel, Pedido pedido, BindingResult bindingResult) {
+	public ModelAndView adicionaAoPedido(@SessionAttribute("carrinho") List<Produto> carrinho, Pedido pedido,
+			BindingResult bindingResult) {
 
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
 		carrinho.add(pedido.getProdutos().get(0));
@@ -63,7 +66,7 @@ public class PedidoController {
 		for (Produto produto : carrinho) {
 			valTotal += produto.getPrecoProduto();
 		}
-		
+
 		modelAndView.addObject("valorTotal", valTotal);
 
 		return modelAndView;
