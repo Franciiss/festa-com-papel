@@ -16,9 +16,9 @@ public class DataConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("mysql://b7aa60b7e27f66:93d5da78@us-cdbr-iron-east-05.cleardb.net/heroku_4159ac44678b0c4?reconnect=true");
+		dataSource.setUrl("us-cdbr-iron-east-05.cleardb.net");
 		dataSource.setUsername("b7aa60b7e27f66");
-		dataSource.setPassword("93d5da78");
+		dataSource.setPassword("765a7aac4cab7cf");
 		return dataSource;
 	}
 
