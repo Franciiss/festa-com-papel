@@ -15,6 +15,7 @@ import com.festacompapel.model.Categoria;
 import com.festacompapel.repositry.CategoriaRepository;
 
 @Controller
+@RequestMapping("value = /herokuapp.com/")
 public class CategoriaController {
 
 	public static final String FORM_CATEGORIA = "/categoria/form-categoria";
