@@ -16,9 +16,9 @@ public class DataConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/festacompapel");
-		dataSource.setUsername("root");
-		dataSource.setPassword("");
+		dataSource.setUrl("mysql://b7aa60b7e27f66:93d5da78@us-cdbr-iron-east-05.cleardb.net/heroku_4159ac44678b0c4?reconnect=true");
+		dataSource.setUsername("b7aa60b7e27f66");
+		dataSource.setPassword("93d5da78");
 		return dataSource;
 	}
 
