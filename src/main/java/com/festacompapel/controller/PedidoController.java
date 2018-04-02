@@ -27,8 +27,8 @@ import com.festacompapel.repositry.ProdutoRepository;
 @SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })
 public class PedidoController {
 
-	public static final String FORM_PEDIDO = "/pedido/form-pedido";
-	public static final String LISTA_PEDIDO = "/pedido/lista-pedido";
+	public static final String FORM_PEDIDO = "pedido/form-pedido";
+	public static final String LISTA_PEDIDO = "pedido/lista-pedido";
 
 	@Autowired
 	PedidoRepository pedidoRepository;

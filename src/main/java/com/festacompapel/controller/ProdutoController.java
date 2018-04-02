@@ -16,7 +16,7 @@ import com.festacompapel.repositry.ProdutoRepository;
 @Controller
 public class ProdutoController {
 
-	public static final String FORM_PRODUTO = "/produto/form-produto";
+	public static final String FORM_PRODUTO = "produto/form-produto";
 
 	@Autowired
 	ProdutoRepository produtoRepository;
