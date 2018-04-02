@@ -18,8 +18,8 @@ import com.festacompapel.repositry.CategoriaRepository;
 @RequestMapping
 public class CategoriaController {
 
-	public static final String FORM_CATEGORIA = "/categoria/form-categoria";
-	public static final String LISTA_CATEGORIA = "/categoria/lista-categoria";
+	public static final String FORM_CATEGORIA = "categoria/form-categoria";
+	public static final String LISTA_CATEGORIA = "categoria/lista-categoria";
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
