@@ -24,7 +24,7 @@ import com.festacompapel.repositry.PedidoRepository;
 import com.festacompapel.repositry.ProdutoRepository;
 
 @Controller
-@SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })
+@SessionAttributes(value = { "clientes", "produtos", "carrinho"})
 public class PedidoController {
 
 	public static final String FORM_PEDIDO = "pedido/form-pedido";
