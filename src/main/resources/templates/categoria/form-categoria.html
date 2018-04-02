@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FestaComPapel</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+<link rel="stylesheet" href="/css/styles.min.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-light navbar-expand-lg navigation-clean">
+		<div class="container-fluid">
+			<button class="navbar-toggler" data-toggle="collapse"
+				data-target="#navcol-1" id="toggler">
+				<span class="sr-only">Toggle navigation</span><span
+					class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navcol-1">
+				<ul class="nav navbar-nav mx-auto"
+					style="margin-right: 100px; margin-left: 100px;">
+					<li class="nav-item" role="presentation"><a
+						class="nav-link text-uppercase active" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">Home </a></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">cliente</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Cliente</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Clientes</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">produto</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Produto</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Produtos</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">categoria</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Categoria</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Categorias</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">Pedido</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Pedido</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Pedidos</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<form th:action="@{/form-categoria}" th:object="${categoria}"
+		method="post">
+		<div class="container profile profile-view" id="profile">
+			<div class="form-row profile-row">
+				<div class="col-md-4 relative">
+					<div class="avatar">
+						<div class="avatar-bg center"></div>
+					</div>
+					<input type="file" class="form-control" name="avatar-file">
+				</div>
+				<div class="col-md-8">
+					<h1>Categoria</h1>
+					<hr>
+					<div class="form-row">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label>Nome</label><input class="form-control" type="text"
+									name="firstname" th:field="*{nome}">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label>Descrição</label><input class="form-control" type="text"
+									name="lastname" th:field="*{descricao}">
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-row">
+						<div class="col-md-12 content-right">
+							<input class="btn btn-primary form-btn" type="submit"
+								value="submit" name="submit">
+							<button class="btn btn-danger form-btn" type="reset">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+	<footer data-aos="slide-up" id="footer"
+		style="margin: 0px; padding: 100px;"></footer>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+	<script src="/js/script.min.js"></script>
+</body>
+
+</html>

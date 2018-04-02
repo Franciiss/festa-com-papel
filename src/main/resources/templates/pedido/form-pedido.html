@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FestaComPapel</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Cookie">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+<link rel="stylesheet" href="/css/styles.min.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-light navbar-expand-lg navigation-clean">
+		<div class="container-fluid">
+			<button class="navbar-toggler" data-toggle="collapse"
+				data-target="#navcol-1" id="toggler">
+				<span class="sr-only">Toggle navigation</span><span
+					class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navcol-1">
+				<ul class="nav navbar-nav mx-auto"
+					style="margin-right: 100px; margin-left: 100px;">
+					<li class="nav-item" role="presentation"><a
+						class="nav-link text-uppercase active" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">Home </a></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">cliente</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Cliente</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Clientes</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">produto</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Produto</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Produtos</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">categoria</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Categoria</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Categorias</a>
+						</div></li>
+					<li class="dropdown"><a
+						class="dropdown-toggle nav-link text-uppercase"
+						data-toggle="dropdown" aria-expanded="false" href="#"
+						style="font-family: 'Source Sans Pro', sans-serif;">Pedido</a>
+						<div class="dropdown-menu" role="menu">
+							<a class="dropdown-item" role="presentation" href="#">Cadastrar
+								Pedido</a><a class="dropdown-item" role="presentation" href="#">Listar
+								Pedidos</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<form th:action="@{/form-pedido}" th:object="${pedido}" method="post">
+		<div class="container profile profile-view" id="profile">
+			<div class="form-row profile-row">
+				<div class="col-md-8 col-lg-12 offset-lg-0">
+					<h1>Produto</h1>
+					<div class="form-group">
+						<select class="form-control" th:field="*{produtos}"><optgroup>
+								<option th:each="produto : ${produtos}"
+									th:value="${produto.idProduto}"
+									th:text="${produto.nomeProduto}"></option>
+							</optgroup></select>
+					</div>
+					<div class="form-row">
+						<div class="col-md-12 content-right">
+							<button class="btn btn-primary form-btn" type="submit">Adicionar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="container profile profile-view" id="profile">
+		<div class="form-row profile-row">
+			<div class="col-md-8 col-lg-12 offset-lg-0">
+				<div class="form-row"></div>
+				<div class="form-group">
+					<h1>Produtos Selecionados</h1>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Quantidade</th>
+									<th>Preço</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<th:block th:each="produtoCarrinho : ${carrinho}">
+								<tr>
+									<td th:text="${produtoCarrinho.nomeProduto}"></td>
+									<td th:text="${produtoCarrinho.quantidadeProduto}"></td>
+									<td th:text="${produtoCarrinho.precoProduto}"></td>
+									<td></td>
+									<td>
+										<form method="POST"
+											th:action="@{/form-pedido/remover/{id}(id=${produtoCarrinho.idProduto})}">
+											<button type="submit" style="color: red">X</button>
+										</form>
+								</tr>
+							</th:block>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<form th:action="@{/salva-pedido}" th:object="${pedido}" method="post">
+		<div class="container profile profile-view" id="profile">
+			<div class="form-row profile-row">
+				<div class="col-md-8 col-lg-12 offset-lg-0">
+					<h1>Pedido</h1>
+					<hr>
+					<div class="form-group">
+						<label>Cliente</label><select class="form-control"
+							th:field="*{cliente.idCliente}"><optgroup>
+								<option th:each="cliente : ${clientes}"
+									th:value="${cliente.idCliente}" th:text="${cliente.nome}"></option>
+							</optgroup></select>
+					</div>
+
+					<hr>
+					<div class="form-row">
+						<div class="col-sm-12 col-md-2">
+							<div class="form-group">
+								<label>Desconto</label><input class="form-control"
+									id="campoDesconto" th:field="*{descontoPedido}" type="number"
+									onChange="calculaDesconto(this.value)">
+							</div>
+						</div>
+					</div>
+
+					<script>
+					function calculaDesconto(val){
+						var valorSemDesconto = document.getElementById("valorSemDesconto").innerHTML;
+						if(val > 100){
+							alert("NÃO SE DÁ DESCONTO MAIOR QUE 100%");
+							document.getElementById("campoDesconto").innerHTML = 0;
+							location.reload(true);
+						} else {
+						var desconto = (val / 100) * valorSemDesconto;
+						var valorComDesconto = valorSemDesconto - desconto;
+						document.getElementById("ValorDoDesconto").innerHTML = desconto;
+						document.getElementById("valorTotal").innerHTML = valorComDesconto;
+						}
+					}
+					</script>
+
+					<div class="form-row">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label><strong>SubTotal</strong></label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label th:text="${valorTotal}" id="valorSemDesconto"
+									class="float-right">XXXX</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label><strong>Desconto</strong></label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label id="ValorDoDesconto" class="float-right"></label>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label><strong>Total</strong></label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label id="valorTotal" class="float-right"></label>
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label>Data de Entrega</label><input class="form-control"
+									th:field="*{dataEntregaPedido}" type="date">
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<div class="form-group">
+								<label>Valor do frete:</label><input class="form-control"
+									th:field="*{frete}" type="text" name="lastname">
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-12 content-right">
+							<button class="btn btn-primary form-btn" type="submit">Salvar</button>
+							<button class="btn btn-danger form-btn" type="reset">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<footer data-aos="slide-up" id="footer"
+		style="margin: 0px; padding: 150px;"></footer>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+	<script src="/js/script.min.js"></script>
+</body>
+
+</html>
