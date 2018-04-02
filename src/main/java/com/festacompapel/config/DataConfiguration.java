@@ -12,7 +12,7 @@ public class DataConfiguration {
 
 	@Bean
 	public BasicDataSource dataSource() throws URISyntaxException {
-		URI dbUri = new URI(System.getenv("mysql://b7aa60b7e27f66:93d5da78@us-cdbr-iron-east-05.cleardb.net/heroku_4159ac44678b0c4?reconnect=true"));
+		URI dbUri = new URI(System.getenv("b7aa60b7e27f66:93d5da78@us-cdbr-iron-east-05.cleardb.net/heroku_4159ac44678b0c4?reconnect=true"));
 
 		String username = dbUri.getUserInfo().split(":")[0];
 		String password = dbUri.getUserInfo().split(":")[1];
