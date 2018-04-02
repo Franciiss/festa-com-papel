@@ -1,7 +1,5 @@
 package com.festacompapel.model;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
