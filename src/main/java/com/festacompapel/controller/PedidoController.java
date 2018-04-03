@@ -130,12 +130,4 @@ public class PedidoController {
 
 		return "redirect:/lista-pedidos";
 	}
-
-	@RequestMapping(value = "/lista-pedidos", method = RequestMethod.GET)
-	public ModelAndView listaCategoria(Pedido pedido) {
-		ModelAndView modelAndView = new ModelAndView(LISTA_PEDIDO);
-		modelAndView.addObject("pedidos", pedidoRepository.findAll());
-		return modelAndView;
-	}
-
 }
