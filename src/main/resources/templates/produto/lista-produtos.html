@@ -105,10 +105,10 @@
 				<td th:text="${produto.valorUnitario}"></td>
 				<td th:text="${produto.categoria.nome}"></td>
 				<th><a
-					th:href="@{/cliente/edicao/{id}(id=${cliente.idCliente})}"
+					th:href="@{/produto/edicao/{id}(id=${produto.idCliente})}"
 					class="btn btn-info btn-sm">Editar</a></th>
 				<th><a
-					th:href="@{/cliente/remover/{id}(id=${cliente.idCliente})}"
+					th:href="@{/produto/remover/{id}(id=${produto.idCliente})}"
 					class="btn btn-danger btn-sm">Excluir</a></th>
 			</tr>
 		</tbody>
