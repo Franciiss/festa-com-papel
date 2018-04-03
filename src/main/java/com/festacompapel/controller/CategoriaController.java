@@ -1,5 +1,7 @@
 package com.festacompapel.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,9 @@ public class CategoriaController {
 	public ModelAndView edicao(@PathVariable("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
+		List<Categoria> categorias = (List<Categoria>) categoriaRepository.findAll();
+			
+		categoriaRepository.save(categoria);
 		return modelAndView;
 	}
 
