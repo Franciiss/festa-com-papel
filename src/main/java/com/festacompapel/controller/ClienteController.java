@@ -29,16 +29,16 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/lista-clientes", method = RequestMethod.GET)
-	public ModelAndView listaCategoria(Cliente cliente) {
+	public ModelAndView listaClientes(Cliente cliente) {
 		ModelAndView modelAndView = new ModelAndView(LISTA_CLIENTES);
 		modelAndView.addObject("clientes", clienteRepository.findAll());
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/cliente/remover/{id}", method = RequestMethod.GET)
-	public String excluirCategoria(@PathVariable("id") Cliente cliente) {
+	public String excluirCliente(@PathVariable("id") Cliente cliente) {
 		clienteRepository.delete(cliente);
-		return "redirect:/form-categoria";
+		return "redirect:/lista-clientes";
 	}
 
 	@RequestMapping(value = "/form-cliente", method = RequestMethod.POST)

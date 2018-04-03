@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,7 @@ import com.festacompapel.repositry.ProdutoRepository;
 public class ProdutoController {
 
 	public static final String FORM_PRODUTO = "produto/form-produto";
+	public static final String LISTA_PRODUTOS = "produto/lista-produtos";
 
 	@Autowired
 	ProdutoRepository produtoRepository;
@@ -43,7 +45,20 @@ public class ProdutoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/form-produto";
+		return "redirect:/lista-produto";
+	}
+
+	@RequestMapping(value = "/lista-produtos", method = RequestMethod.GET)
+	public ModelAndView listaPedidos(Produto produto) {
+		ModelAndView modelAndView = new ModelAndView(LISTA_PRODUTOS);
+		modelAndView.addObject("produtos", produtoRepository.findAll());
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/pedido/remover/{id}", method = RequestMethod.GET)
+	public String excluirProduto(@PathVariable("id") Produto produto) {
+		produtoRepository.delete(produto);
+		return "redirect:/lista-produto";
 	}
 
 }

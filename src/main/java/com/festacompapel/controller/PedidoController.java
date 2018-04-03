@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.festacompapel.model.Cliente;
 import com.festacompapel.model.Pedido;
 import com.festacompapel.model.Produto;
 import com.festacompapel.repositry.ClienteRepository;
@@ -44,16 +43,16 @@ public class PedidoController {
 	double valorTotal = 0;
 
 	@RequestMapping(value = "/lista-pedidos", method = RequestMethod.GET)
-	public ModelAndView listaCategoria(Cliente cliente) {
+	public ModelAndView listaPedidos(Pedido pedido) {
 		ModelAndView modelAndView = new ModelAndView(LISTA_PEDIDO);
 		modelAndView.addObject("pedidos", pedidoRepository.findAll());
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/pedido/remover/{id}", method = RequestMethod.GET)
-	public String excluirCategoria(@PathVariable("id") Pedido pedido) {
+	public String excluirPedido(@PathVariable("id") Pedido pedido) {
 		pedidoRepository.delete(pedido);
-		return "redirect:/form-categoria";
+		return "redirect:/lista-pedidos";
 	}
 
 	@RequestMapping(value = "/form-pedido", method = RequestMethod.GET)
