@@ -43,7 +43,7 @@ public class Produto implements Serializable {
 	@Column(name = "descricaoProduto")
 	private String descricaoProduto;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Categoria categoria;
 
 	@PrePersist
