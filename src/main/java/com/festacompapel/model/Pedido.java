@@ -61,7 +61,7 @@ public class Pedido implements Serializable {
 
 	@Column(name = "descontoPedido")
 	private double descontoPedido;
-	
+
 	@Column(name = "valorTotal")
 	private double valorTotal;
 
@@ -80,7 +80,7 @@ public class Pedido implements Serializable {
 	private void prePersistUpdate() {
 		this.dataDoPedido = this.dataDoPedido.getInstance();
 		this.valorPedidoComDesconto = (this.descontoPedido / 100) * valorPedido;
-		this.dataEntregaPedidoCalendar = this.formataDataPedidoEntrega(dataEntregaPedido);
+		this.dataEntregaPedidoCalendar = this.formataDataPedidoEntrega();
 		this.status = StatusPedido.NOVO;
 		this.valorTotal = this.valorPedidoComDesconto + frete;
 	}
@@ -91,12 +91,18 @@ public class Pedido implements Serializable {
 		return data;
 	}
 
-	public Calendar formataDataPedidoEntrega(String data) {
+	public String getDataPedidoEntregaFormatada() {
+		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+		String data = s.format(this.dataEntregaPedidoCalendar.getTime());
+		return data;
+	}
+
+	public Calendar formataDataPedidoEntrega() {
 		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			cal.setTime(sdf.parse(data));
+			cal.setTime(sdf.parse(this.getDataEntregaPedido().toString()));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
