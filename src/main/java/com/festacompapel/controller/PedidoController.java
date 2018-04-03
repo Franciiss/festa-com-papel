@@ -27,7 +27,7 @@ import com.festacompapel.repositry.ProdutoRepository;
 public class PedidoController {
 
 	public static final String FORM_PEDIDO = "pedido/form-pedido";
-	public static final String LISTA_PEDIDO = "pedido/lista-pedido";
+	public static final String LISTA_PEDIDO = "pedido/lista-pedidos";
 
 	@Autowired
 	PedidoRepository pedidoRepository;
