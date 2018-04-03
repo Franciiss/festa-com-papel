@@ -55,10 +55,9 @@ public class ProdutoController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/pedido/remover/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/produto/remover/{id}", method = RequestMethod.GET)
 	public String excluirProduto(@PathVariable("id") Produto produto) {
 		produtoRepository.delete(produto);
 		return "redirect:/lista-produto";
 	}
-
 }
