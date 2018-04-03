@@ -17,7 +17,7 @@ import com.festacompapel.repositry.ClienteRepository;
 public class ClienteController {
 
 	public static final String FORM_CLIENTE = "cliente/form-cliente";
-	public static final String LISTA_CLIENTE = "cliente/lista-cliente";
+	public static final String LISTA_CLIENTE = "cliente/lista-clientes";
 
 	@Autowired
 	ClienteRepository clienteRepository;
