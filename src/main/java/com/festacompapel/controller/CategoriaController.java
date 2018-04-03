@@ -24,7 +24,7 @@ public class CategoriaController {
 	@Autowired
 	CategoriaRepository categoriaRepository;
 
-	@RequestMapping(value = "/lista-categoria", method = RequestMethod.GET)
+	@RequestMapping(value = "/lista-categorias", method = RequestMethod.GET)
 	public ModelAndView listaCategoria(Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(LISTA_CATEGORIA);
 		modelAndView.addObject("categorias", categoriaRepository.findAll());

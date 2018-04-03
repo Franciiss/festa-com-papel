@@ -14,6 +14,7 @@ public class FestaComPapelApplication {
 		SpringApplication.run(FestaComPapelApplication.class, args);
 	}
 
+	@SuppressWarnings("unused")
 	private TemplateEngine templateEngine(ITemplateResolver templateResolver) {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.addDialect(new Java8TimeDialect());

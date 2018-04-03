@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.festacompapel.model.Categoria;
 import com.festacompapel.model.Cliente;
 import com.festacompapel.repositry.ClienteRepository;
 
@@ -16,6 +17,7 @@ import com.festacompapel.repositry.ClienteRepository;
 public class ClienteController {
 
 	public static final String FORM_CLIENTE = "cliente/form-cliente";
+	public static final String LISTA_CLIENTE = "cliente/lista-cliente";
 
 	@Autowired
 	ClienteRepository clienteRepository;
@@ -23,6 +25,13 @@ public class ClienteController {
 	@RequestMapping("/form-cliente")
 	public ModelAndView index(Cliente Cliente) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CLIENTE);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/lista-clientes", method = RequestMethod.GET)
+	public ModelAndView listaCategoria(Cliente cliente) {
+		ModelAndView modelAndView = new ModelAndView(LISTA_CLIENTE);
+		modelAndView.addObject("clientes", clienteRepository.findAll());
 		return modelAndView;
 	}
 

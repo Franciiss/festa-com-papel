@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,9 @@ public class Cliente implements Serializable {
 
 	@Column(name = "sobreNome")
 	private String sobreNome;
+
+	@Column(name = "nomeFormato")
+	private String nomeFormato;
 
 	@Column(name = "ruaCliente")
 	private String rua;
@@ -52,6 +57,12 @@ public class Cliente implements Serializable {
 
 	@Column(name = "cepCliente")
 	private String cepCliente;
+
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		this.nomeFormato = this.nome + " " + this.sobreNome;
+	}
 
 	public long getIdCliente() {
 		return idCliente;
@@ -147,5 +158,13 @@ public class Cliente implements Serializable {
 
 	public void setCepCliente(String cepCliente) {
 		this.cepCliente = cepCliente;
+	}
+
+	public String getNomeFormato() {
+		return nomeFormato;
+	}
+
+	public void setNomeFormato(String nomeFormato) {
+		this.nomeFormato = nomeFormato;
 	}
 }
