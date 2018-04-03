@@ -17,7 +17,7 @@ import com.festacompapel.repositry.ClienteRepository;
 public class ClienteController {
 
 	public static final String FORM_CLIENTE = "cliente/form-cliente";
-	public static final String LISTA_CLIENTE = "cliente/lista-clientes";
+	public static final String LISTA_CLIENTES = "cliente/lista-clientes";
 
 	@Autowired
 	ClienteRepository clienteRepository;
@@ -30,7 +30,7 @@ public class ClienteController {
 
 	@RequestMapping(value = "/lista-clientes", method = RequestMethod.GET)
 	public ModelAndView listaCategoria(Cliente cliente) {
-		ModelAndView modelAndView = new ModelAndView(LISTA_CLIENTE);
+		ModelAndView modelAndView = new ModelAndView(LISTA_CLIENTES);
 		modelAndView.addObject("clientes", clienteRepository.findAll());
 		return modelAndView;
 	}
