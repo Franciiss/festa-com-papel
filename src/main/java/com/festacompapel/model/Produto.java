@@ -48,7 +48,7 @@ public class Produto implements Serializable {
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
-		this.valorUnitario = this.precoProduto / this.valorUnitario;
+		this.valorUnitario = (this.precoProduto / this.quantidadeProduto);
 	}
 
 	public long getIdProduto() {
