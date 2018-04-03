@@ -26,7 +26,7 @@ public class Categoria implements Serializable {
 	@Column(name = "nomeCategoria")
 	private String nome;
 
-	@Size(min=1, max=40)
+	@Size(max=40)
 	@Column(name = "descricaoCategoria")
 	private String descricao;
 

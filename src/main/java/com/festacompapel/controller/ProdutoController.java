@@ -45,7 +45,7 @@ public class ProdutoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/lista-produto";
+		return "redirect:/lista-produtos";
 	}
 
 	@RequestMapping(value = "/lista-produtos", method = RequestMethod.GET)
