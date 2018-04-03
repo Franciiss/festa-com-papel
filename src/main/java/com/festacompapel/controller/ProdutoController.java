@@ -49,7 +49,7 @@ public class ProdutoController {
 	}
 
 	@RequestMapping(value = "/lista-produtos", method = RequestMethod.GET)
-	public ModelAndView listaPedidos(Produto produto) {
+	public ModelAndView listaProdutos(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView(LISTA_PRODUTOS);
 		modelAndView.addObject("produtos", produtoRepository.findAll());
 		return modelAndView;
