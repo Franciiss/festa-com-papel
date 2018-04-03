@@ -1,7 +1,5 @@
 package com.festacompapel.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,24 +46,20 @@ public class CategoriaController {
 
 		categoriaRepository.save(categoria);
 
-		return "redirect:/form-categoria";
+		return "redirect:/lista-categorias";
 	}
 
 	@GetMapping("categoria/edicao/{id}")
 	public ModelAndView edicao(@PathVariable("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
-		List<Categoria> categorias = (List<Categoria>) categoriaRepository.findAll();
-			
 		categoriaRepository.save(categoria);
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/categoria/remover/{id}", method = RequestMethod.GET)
 	public String excluirCategoria(@PathVariable("id") Categoria categoria) {
-
 		categoriaRepository.delete(categoria);
-
-		return "redirect:/form-categoria";
+		return "redirect:/lista-categorias";
 	}
 }

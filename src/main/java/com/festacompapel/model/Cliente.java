@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Cliente")
@@ -23,6 +24,7 @@ public class Cliente implements Serializable {
 	private long idCliente;
 
 	@Column(name = "nomeCliente")
+	@NotNull
 	private String nome;
 
 	@Column(name = "sobreNome")

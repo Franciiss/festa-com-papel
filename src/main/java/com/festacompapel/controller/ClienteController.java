@@ -5,11 +5,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.festacompapel.model.Categoria;
 import com.festacompapel.model.Cliente;
 import com.festacompapel.repositry.ClienteRepository;
 
@@ -35,6 +35,12 @@ public class ClienteController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/cliente/remover/{id}", method = RequestMethod.GET)
+	public String excluirCategoria(@PathVariable("id") Cliente cliente) {
+		clienteRepository.delete(cliente);
+		return "redirect:/form-categoria";
+	}
+
 	@RequestMapping(value = "/form-cliente", method = RequestMethod.POST)
 	public String postFormulario(@Valid Cliente cliente, BindingResult bindingResult) {
 
@@ -47,7 +53,7 @@ public class ClienteController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/form-produto";
+		return "redirect:/lista-clientes";
 	}
 
 }

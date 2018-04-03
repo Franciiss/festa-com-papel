@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Produto")
@@ -22,15 +25,18 @@ public class Produto implements Serializable {
 	private long idProduto;
 
 	@Column(name = "nomeProduto")
+	@NotNull
 	private String nomeProduto;
 
 	@Column(name = "valorUnitario")
 	private double valorUnitario;
 
 	@Column(name = "precoProduto")
+	@NotNull
 	private double precoProduto;
 
 	@Column(name = "quantidadeProduto")
+	@NotNull
 	private int quantidadeProduto;
 
 	@Column(name = "descricaoProduto")
@@ -38,6 +44,12 @@ public class Produto implements Serializable {
 
 	@ManyToOne
 	private Categoria categoria;
+
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		this.valorUnitario = this.precoProduto / this.valorUnitario;
+	}
 
 	public long getIdProduto() {
 		return idProduto;
