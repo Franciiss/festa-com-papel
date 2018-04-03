@@ -68,10 +68,10 @@ public class Pedido implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Cliente cliente;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	private List<Produto> produtos;
 
 	@SuppressWarnings("static-access")
