@@ -1,5 +1,7 @@
 package com.festacompapel.model;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,8 +57,8 @@ public class Pedido implements Serializable {
 	@Column(name = "valorPedido")
 	private double valorPedido;
 
-	@Column(name = "valorPedidoComDesconto")
-	private double valorPedidoComDesconto;
+	@Column(name = "valorDoDesconto")
+	private double valorDoDesconto;
 
 	@Column(name = "descontoPedido")
 	private double descontoPedido;
@@ -78,10 +80,10 @@ public class Pedido implements Serializable {
 	@PreUpdate
 	private void prePersistUpdate() {
 		this.dataDoPedido = this.dataDoPedido.getInstance();
-		this.valorPedidoComDesconto = (this.descontoPedido / 100) * valorPedido;
 		this.dataEntregaPedidoCalendar = this.formataDataPedidoEntrega();
+		this.valorDoDesconto = (this.descontoPedido / 100) * valorPedido;
 		this.status = StatusPedido.NOVO;
-		this.valorTotal = this.valorPedidoComDesconto + frete;
+		this.valorTotal = this.valorPedido + this.frete - this.valorDoDesconto;
 	}
 
 	public String getDataPedidoFormatada() {
@@ -172,12 +174,12 @@ public class Pedido implements Serializable {
 		this.valorPedido = valorPedido;
 	}
 
-	public double getValorPedidoComDesconto() {
-		return valorPedidoComDesconto;
+	public double getValorDoDesconto() {
+		return valorDoDesconto;
 	}
 
-	public void setValorPedidoComDesconto(double valorPedidoComDesconto) {
-		this.valorPedidoComDesconto = valorPedidoComDesconto;
+	public void setValorDoDesconto(double valorDoDesconto) {
+		this.valorDoDesconto = valorDoDesconto;
 	}
 
 	public Calendar getDataEntregaPedidoCalendar() {
