@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,12 +46,12 @@ public class CategoriaController {
 		}
 
 		categoriaRepository.save(categoria);
-
+		
 		return "redirect:/lista-categorias";
 	}
 
 	@GetMapping("categoria/edicao/{id}")
-	public ModelAndView edicao(@PathVariable("id") Categoria categoria) {
+	public ModelAndView edicao(@ModelAttribute("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
 		categoriaRepository.save(categoria);
