@@ -53,6 +53,7 @@ public class CategoriaController {
 	@GetMapping("categoria/edicao/{id}")
 	public ModelAndView edicao(@PathVariable("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
+		modelAndView.addObject("categoria", categoria);
 		categoriaRepository.saveAndFlush(categoria);
 		return modelAndView;
 	}
