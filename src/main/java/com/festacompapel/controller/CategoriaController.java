@@ -46,7 +46,7 @@ public class CategoriaController {
 		}
 
 		categoriaRepository.save(categoria);
-		
+
 		return "redirect:/lista-categorias";
 	}
 
@@ -54,7 +54,9 @@ public class CategoriaController {
 	public ModelAndView edicao(@PathVariable("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
-		categoriaRepository.save(categoria);
+		Categoria c = new Categoria();
+		c = categoria;
+		categoriaRepository.save(c);
 		return modelAndView;
 	}
 
