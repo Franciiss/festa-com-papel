@@ -54,6 +54,12 @@ public class CategoriaController {
 	public ModelAndView edicao(@ModelAttribute("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
+
+		System.out.println(categoria);
+		System.out.println(categoria.getIdCategoria());
+		System.out.println(categoria.getDescricao());
+		System.out.println(categoria.getNome());
+		
 		categoriaRepository.save(categoria);
 		return modelAndView;
 	}
