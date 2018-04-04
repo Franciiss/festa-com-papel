@@ -3,6 +3,7 @@ package com.festacompapel.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,13 +115,18 @@ public class PedidoController {
 
 	@RequestMapping(value = "/salva-pedido", method = RequestMethod.POST)
 	public String postFormulario(@SessionAttribute("carrinho") List<Produto> carrinho, @Valid Pedido pedido,
-			@SessionAttribute("valorTotal") double valorTotal, BindingResult bindingResult) {
+			@SessionAttribute("valorTotal") double valorTotal, BindingResult bindingResult, HttpSession httpSession) {
 
 		pedido.setProdutos(carrinho);
 		pedido.setValorPedido(valorTotal);
 
 		try {
 			pedidoRepository.save(pedido);
+			httpSession.removeAttribute("clientes");
+			httpSession.removeAttribute("produtos");
+			httpSession.removeAttribute("carrinho");
+			httpSession.removeAttribute("valorTotal");
+
 			return "redirect:/lista-pedidos";
 		} catch (Exception e) {
 			e.printStackTrace();
