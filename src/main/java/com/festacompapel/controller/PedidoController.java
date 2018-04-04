@@ -122,11 +122,8 @@ public class PedidoController {
 
 		try {
 			pedidoRepository.save(pedido);
-			httpSession.removeAttribute("clientes");
-			httpSession.removeAttribute("produtos");
-			httpSession.removeAttribute("carrinho");
-			httpSession.removeAttribute("valorTotal");
-
+			carrinho.clear();
+			valorTotal = 0;
 			return "redirect:/lista-pedidos";
 		} catch (Exception e) {
 			e.printStackTrace();
