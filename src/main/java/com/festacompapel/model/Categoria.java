@@ -23,7 +23,7 @@ public class Categoria implements Serializable {
 	private long idCategoria;
 
 	@NotNull
-	@Column(name = "nomeCategoria")
+	@Column(name = "nomeCategoria", unique = true)
 	private String nome;
 
 	@Size(max=40)
