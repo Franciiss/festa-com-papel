@@ -1,8 +1,8 @@
 package com.festacompapel.repositry;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.festacompapel.model.Categoria;
 
-public interface CategoriaRepository extends CrudRepository<Categoria, Long> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 }

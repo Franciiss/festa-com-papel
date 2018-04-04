@@ -1,8 +1,8 @@
 package com.festacompapel.repositry;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.festacompapel.model.Pedido;
 
-public interface PedidoRepository extends CrudRepository<Pedido, Long> {
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 }
