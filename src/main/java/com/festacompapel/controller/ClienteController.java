@@ -41,7 +41,7 @@ public class ClienteController {
 		return "redirect:/lista-clientes";
 	}
 
-	@RequestMapping(value = "/cliente/edicao/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/cliente/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoCliente(@PathVariable("id") Cliente cliente) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CLIENTE);
 		modelAndView.addObject("cliente", cliente);

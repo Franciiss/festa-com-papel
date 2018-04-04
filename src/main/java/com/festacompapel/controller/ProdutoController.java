@@ -55,7 +55,7 @@ public class ProdutoController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/produto/edicao/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/produto/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoProduto(@PathVariable("id") Produto produto) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PRODUTO);
 		modelAndView.addObject("produto", produto);

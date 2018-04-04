@@ -48,7 +48,7 @@ public class CategoriaController {
 		return "redirect:/lista-categorias";
 	}
 
-	@RequestMapping(value = "/categoria/edicao/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/categoria/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoCategoria(@PathVariable("id") Categoria categoria) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		modelAndView.addObject("categoria", categoria);
