@@ -41,6 +41,14 @@ public class ClienteController {
 		return "redirect:/lista-clientes";
 	}
 
+	@RequestMapping(value = "/cliente/edicao/{id}", method = RequestMethod.POST)
+	public ModelAndView edicaoCliente(@PathVariable("id") Cliente cliente) {
+		ModelAndView modelAndView = new ModelAndView(FORM_CLIENTE);
+		modelAndView.addObject("cliente", cliente);
+		clienteRepository.saveAndFlush(cliente);
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/form-cliente", method = RequestMethod.POST)
 	public String postFormulario(@Valid Cliente cliente, BindingResult bindingResult) {
 

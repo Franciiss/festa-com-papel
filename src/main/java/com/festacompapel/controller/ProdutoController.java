@@ -55,6 +55,14 @@ public class ProdutoController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/produto/edicao/{id}", method = RequestMethod.POST)
+	public ModelAndView edicaoProduto(@PathVariable("id") Produto produto) {
+		ModelAndView modelAndView = new ModelAndView(FORM_PRODUTO);
+		modelAndView.addObject("produto", produto);
+		produtoRepository.saveAndFlush(produto);
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/produto/remover/{id}", method = RequestMethod.GET)
 	public String excluirProduto(@PathVariable("id") Produto produto) {
 		produtoRepository.delete(produto);

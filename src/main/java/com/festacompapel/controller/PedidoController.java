@@ -130,4 +130,12 @@ public class PedidoController {
 
 		return "redirect:/lista-pedidos";
 	}
+
+	@RequestMapping(value = "/pedido/edicao/{id}", method = RequestMethod.POST)
+	public ModelAndView edicaoPedido(@PathVariable("id") Pedido pedido) {
+		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
+		modelAndView.addObject("pedido", pedido);
+		pedidoRepository.saveAndFlush(pedido);
+		return modelAndView;
+	}
 }
