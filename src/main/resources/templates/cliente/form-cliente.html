@@ -32,7 +32,7 @@
 				<span class="sr-only">Toggle navigation</span><span
 					class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse" id="navcol-1">
 				<ul class="nav navbar-nav mx-auto"
 					style="margin-right: 100px; margin-left: 100px;">
@@ -93,36 +93,43 @@
 				<div class="col-md-8">
 					<h1>Cliente</h1>
 					<hr>
+
+					<input type="hidden" name="idCliente"
+						th:value="${cliente.idCliente}" />
+
+
 					<div class="form-row">
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>Nome</label><input class="form-control" type="text"
-									name="firstname" th:field="*{nome}">
+									name="nome" th:value="${cliente.nome}">
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>SobreNome</label><input class="form-control" type="text"
-									name="lastname" th:field="*{sobreNome}">
+									name="sobreNome" th:value="${cliente.sobreNome}">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label>Email </label><input class="form-control" type="email"
-							autocomplete="off" name="email" th:field="*{emailCliente}">
+							autocomplete="off" name="emailCliente"
+							th:value="${cliente.emailCliente}">
 					</div>
 					<div class="form-row">
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>Telefone</label><input class="form-control" type="tel"
-									name="telefone" th:field="*{telefoneCliente}"
+									name="telefoneCliente" th:value="${cliente.telefoneCliente}"
 									autocomplete="off">
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>CEP</label><input class="form-control" type="text"
-									name="confirmpass" th:field="*{cepCliente}" autocomplete="off">
+									name="cepCliente" th:value="${cliente.cepCliente}"
+									autocomplete="off">
 							</div>
 						</div>
 					</div>

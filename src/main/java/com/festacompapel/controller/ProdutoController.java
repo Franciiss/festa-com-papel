@@ -59,6 +59,7 @@ public class ProdutoController {
 	public ModelAndView edicaoProduto(@PathVariable("id") Produto produto) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PRODUTO);
 		modelAndView.addObject("produto", produto);
+		modelAndView.addObject("categorias", categoriaRepository.findAll());
 		produtoRepository.saveAndFlush(produto);
 		return modelAndView;
 	}
