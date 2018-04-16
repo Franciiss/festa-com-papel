@@ -79,7 +79,7 @@
 			</div>
 		</div>
 	</nav>
-	<form th:action="@{/form-categoria}" th:object="${categoria}"
+	<form th:action="@{/form-categoria/salva}" th:object="${categoria}"
 		method="post">
 		<div class="container profile profile-view" id="profile">
 			<div class="form-row profile-row">
@@ -89,6 +89,9 @@
 					</div>
 					<input type="file" class="form-control" name="avatar-file">
 				</div>
+
+				<input type="hidden" name="idCategoria" th:value="${categoria.idCategoria}" />
+
 				<div class="col-md-8">
 					<h1>Categoria</h1>
 					<hr>
@@ -96,13 +99,13 @@
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>Nome</label><input class="form-control" type="text"
-									name="firstname" th:field="*{nome}">
+									name="nome" th:value="${categoria.nome}">
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>Descrição</label><input class="form-control" type="text"
-									name="lastname" th:field="*{descricao}">
+									name="descricao" th:value="${categoria.descricao}">
 							</div>
 						</div>
 					</div>
@@ -118,8 +121,6 @@
 			</div>
 		</div>
 	</form>
-	<footer data-aos="slide-up" id="footer"
-		style="margin: 0px; padding-top: 150px;"></footer>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script

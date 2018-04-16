@@ -19,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.festacompapel.model.Pedido;
 import com.festacompapel.model.Produto;
-import com.festacompapel.repositry.ClienteRepository;
-import com.festacompapel.repositry.PedidoRepository;
-import com.festacompapel.repositry.ProdutoRepository;
+import com.festacompapel.repository.ClienteRepository;
+import com.festacompapel.repository.PedidoRepository;
+import com.festacompapel.repository.ProdutoRepository;
 
 @Controller
 @SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })

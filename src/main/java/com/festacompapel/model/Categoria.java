@@ -18,15 +18,14 @@ public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idCategoria")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCategoria;
 
 	@NotNull
 	@Column(name = "nomeCategoria", unique = true)
 	private String nome;
 
-	@Size(max=40)
+	@Size(max = 40)
 	@Column(name = "descricaoCategoria")
 	private String descricao;
 

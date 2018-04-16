@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.festacompapel.model.Cliente;
-import com.festacompapel.repositry.ClienteRepository;
+import com.festacompapel.repository.ClienteRepository;
 
 @Controller
 public class ClienteController {

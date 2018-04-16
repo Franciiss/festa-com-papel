@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.festacompapel.model.Produto;
-import com.festacompapel.repositry.CategoriaRepository;
-import com.festacompapel.repositry.ProdutoRepository;
+import com.festacompapel.repository.CategoriaRepository;
+import com.festacompapel.repository.ProdutoRepository;
 
 @Controller
 public class ProdutoController {

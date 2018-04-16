@@ -1,4 +1,4 @@
-package com.festacompapel.repositry;
+package com.festacompapel.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
