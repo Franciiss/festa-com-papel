@@ -41,10 +41,6 @@ public class ProdutoService {
 		produtoRepository.delete(produto);
 	}
 
-	public List<Produto> todas() {
-		return produtoRepository.findAll();
-	}
-
 	@Transactional
 	public void excluirPelo(Long id) {
 

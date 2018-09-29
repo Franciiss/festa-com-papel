@@ -2,6 +2,8 @@ package com.festacompapel.controller;
 
 import javax.validation.Valid;
 
+import com.festacompapel.model.StatusBasicos;
+import com.festacompapel.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,14 +15,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.festacompapel.model.Cliente;
 import com.festacompapel.repository.ClienteRepository;
 
+import java.util.Optional;
+
 @Controller
 public class ClienteController {
 
 	public static final String FORM_CLIENTE = "cliente/form-cliente";
 	public static final String LISTA_CLIENTES = "cliente/lista-clientes";
 
+	private final ClienteService clienteService;
+
 	@Autowired
-	ClienteRepository clienteRepository;
+	public ClienteController(ClienteService categoriaService){
+		this.clienteService = categoriaService;
+	}
 
 	@RequestMapping("/form-cliente")
 	public ModelAndView index(Cliente Cliente) {
@@ -29,23 +37,24 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/lista-clientes", method = RequestMethod.GET)
-	public ModelAndView listaClientes(Cliente cliente) {
+	public ModelAndView listaClientes() {
 		ModelAndView modelAndView = new ModelAndView(LISTA_CLIENTES);
-		modelAndView.addObject("clientes", clienteRepository.findAll());
+		modelAndView.addObject("clientes", clienteService.findAllByStatus(StatusBasicos.ATIVO));
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/cliente/remover/{id}", method = RequestMethod.GET)
-	public String excluirCliente(@PathVariable("id") Cliente cliente) {
-		clienteRepository.delete(cliente);
+	public String excluirCliente(@PathVariable("id") Long id) {
+
+		clienteService.atualizarStatus(id, StatusBasicos.INATIVO);
+
 		return "redirect:/lista-clientes";
 	}
 
 	@RequestMapping(value = "/cliente/edicao/{id}", method = RequestMethod.GET)
-	public ModelAndView edicaoCliente(@PathVariable("id") Cliente cliente) {
+	public ModelAndView edicaoCliente(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CLIENTE);
-		modelAndView.addObject("cliente", cliente);
-		clienteRepository.saveAndFlush(cliente);
+		modelAndView.addObject("cliente", clienteService.buscaPor(id));
 		return modelAndView;
 	}
 
@@ -57,11 +66,10 @@ public class ClienteController {
 		}
 
 		try {
-			clienteRepository.save(cliente);
+			clienteService.salva(cliente);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:/lista-clientes";
 	}
-
 }

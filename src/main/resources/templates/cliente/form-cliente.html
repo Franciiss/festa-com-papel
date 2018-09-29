@@ -1,85 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FestaComPapel</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Cookie">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-<link rel="stylesheet" href="/css/styles.min.css">
-</head>
+<head th:replace="fragmentos/fragmentos-layout :: head"></head>
 
 <body>
-	<nav class="navbar navbar-light navbar-expand-lg navigation-clean">
-		<div class="container-fluid">
-			<button class="navbar-toggler" data-toggle="collapse"
-				data-target="#navcol-1" id="toggler">
-				<span class="sr-only">Toggle navigation</span><span
-					class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navcol-1">
-				<ul class="nav navbar-nav mx-auto"
-					style="margin-right: 100px; margin-left: 100px;">
-					<li class="nav-item" role="presentation"><a
-						class="nav-link text-uppercase active" href="/"
-						style="font-family: 'Source Sans Pro', sans-serif;">Home </a></li>
-					<li class="dropdown"><a
-						class="dropdown-toggle nav-link text-uppercase"
-						data-toggle="dropdown" aria-expanded="false" href="#"
-						style="font-family: 'Source Sans Pro', sans-serif;">cliente</a>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" role="presentation" href="/form-cliente">Cadastrar
-								Cliente</a><a class="dropdown-item" role="presentation"
-								href="/lista-clientes">Listar Clientes</a>
-						</div></li>
-					<li class="dropdown"><a
-						class="dropdown-toggle nav-link text-uppercase"
-						data-toggle="dropdown" aria-expanded="false" href="#"
-						style="font-family: 'Source Sans Pro', sans-serif;">produto</a>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" role="presentation" href="/form-produto">Cadastrar
-								Produto</a><a class="dropdown-item" role="presentation"
-								href="/lista-produtos">Listar Produtos</a>
-						</div></li>
-					<li class="dropdown"><a
-						class="dropdown-toggle nav-link text-uppercase"
-						data-toggle="dropdown" aria-expanded="false" href="#"
-						style="font-family: 'Source Sans Pro', sans-serif;">categoria</a>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" role="presentation"
-								href="/form-categoria">Cadastrar Categoria</a><a
-								class="dropdown-item" role="presentation"
-								href="/lista-categorias">Listar Categorias</a>
-						</div></li>
-					<li class="dropdown"><a
-						class="dropdown-toggle nav-link text-uppercase"
-						data-toggle="dropdown" aria-expanded="false" href="#"
-						style="font-family: 'Source Sans Pro', sans-serif;">Pedido</a>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" role="presentation" href="/form-pedido">Cadastrar
-								Pedido</a><a class="dropdown-item" role="presentation"
-								href="/lista-pedidos">Listar Pedidos</a>
-						</div></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+<div th:replace="fragmentos/fragmentos-layout :: navbar"></div>
+
 
 	<form th:action="@{/form-cliente}" th:object="${cliente}" method="post">
 		<div class="container profile profile-view" id="profile">
@@ -94,8 +21,8 @@
 					<h1>Cliente</h1>
 					<hr>
 
-					<input type="hidden" name="idCliente"
-						th:value="${cliente.idCliente}" />
+					<input type="hidden" name="id"
+						th:value="${cliente.id}" />
 
 
 					<div class="form-row">
@@ -108,27 +35,27 @@
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>SobreNome</label><input class="form-control" type="text"
-									name="sobreNome" th:value="${cliente.sobreNome}">
+									name="sobrenome" th:value="${cliente.sobrenome}">
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label>Email </label><input class="form-control" type="email"
-							autocomplete="off" name="emailCliente"
-							th:value="${cliente.emailCliente}">
+							name="email"
+							th:value="${cliente.email}">
 					</div>
 					<div class="form-row">
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>Telefone</label><input class="form-control" type="tel"
-									name="telefoneCliente" th:value="${cliente.telefoneCliente}"
+									name="telefone" th:value="${cliente.telefone}"
 									autocomplete="off">
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<div class="form-group">
 								<label>CEP</label><input class="form-control" type="text"
-									name="cepCliente" th:value="${cliente.cepCliente}"
+									name="cep" th:value="${cliente.cep}"
 									autocomplete="off">
 							</div>
 						</div>
@@ -138,7 +65,7 @@
 						<div class="col-md-12 content-right">
 							<input class="btn btn-primary form-btn" type="submit"
 								value="submit" name="submit">
-							<button class="btn btn-danger form-btn" type="reset">Cancelar</button>
+							<button class="btn btn-danger form-btn" type="reset">Limpar</button>
 						</div>
 					</div>
 				</div>
@@ -146,14 +73,9 @@
 		</div>
 
 	</form>
-	<footer data-aos="slide-up" id="footer"
-		style="margin: 0px; padding: 100px;"></footer>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-	<script src="/js/script.min.js"></script>
+
+<div th:replace="fragmentos/fragmentos-footer :: footer"></div>
+
 </body>
 
 </html>

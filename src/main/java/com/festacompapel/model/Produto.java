@@ -1,16 +1,10 @@
 package com.festacompapel.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -21,89 +15,125 @@ public class Produto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idProduto")
-	private long idProduto;
+	@Column(name = "id")
+	private long id;
 
-	@Column(name = "nomeProduto")
+	@Column(name = "nome")
 	@NotNull
-	private String nomeProduto;
+	private String nome;
 
-	@Column(name = "valorUnitario")
+	@Column(name = "valor_unitario")
 	private double valorUnitario;
 
-	@Column(name = "precoProduto")
 	@NotNull
+	@Column(name = "preco_produto")
 	private double precoProduto;
 
-	@Column(name = "quantidadeProduto")
 	@NotNull
+	@Column(name = "quantidade_roduto")
 	private int quantidadeProduto;
 
-	@Column(name = "descricaoProduto")
+	@Column(name = "descricao_produto")
 	private String descricaoProduto;
+
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
 
 	@ManyToOne
 	private Categoria categoria;
 
+    @Enumerated(EnumType.STRING)
+    private StatusBasicos status;
+
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
-		this.valorUnitario = (this.precoProduto / this.quantidadeProduto);
+	    this.setStatus(StatusBasicos.ATIVO);
+		this.setValorUnitario(this.precoProduto / this.quantidadeProduto);
 	}
 
-	public long getIdProduto() {
-		return idProduto;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setIdProduto(long idProduto) {
-		this.idProduto = idProduto;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getNomeProduto() {
-		return nomeProduto;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public double getPrecoProduto() {
-		return precoProduto;
-	}
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
 
-	public void setPrecoProduto(double precoProduto) {
-		this.precoProduto = precoProduto;
-	}
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
 
-	public int getQuantidadeProduto() {
-		return quantidadeProduto;
-	}
+    public double getPrecoProduto() {
+        return precoProduto;
+    }
 
-	public void setQuantidadeProduto(int quantidadeProduto) {
-		this.quantidadeProduto = quantidadeProduto;
-	}
+    public void setPrecoProduto(double precoProduto) {
+        this.precoProduto = precoProduto;
+    }
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
+    public int getQuantidadeProduto() {
+        return quantidadeProduto;
+    }
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+    public void setQuantidadeProduto(int quantidadeProduto) {
+        this.quantidadeProduto = quantidadeProduto;
+    }
 
-	public double getValorUnitario() {
-		return valorUnitario;
-	}
+    public String getDescricaoProduto() {
+        return descricaoProduto;
+    }
 
-	public void setValorUnitario(double valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
+    public void setDescricaoProduto(String descricaoProduto) {
+        this.descricaoProduto = descricaoProduto;
+    }
 
-	public String getDescricaoProduto() {
-		return descricaoProduto;
-	}
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
 
-	public void setDescricaoProduto(String descricaoProduto) {
-		this.descricaoProduto = descricaoProduto;
-	}
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public StatusBasicos getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusBasicos status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return id == produto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

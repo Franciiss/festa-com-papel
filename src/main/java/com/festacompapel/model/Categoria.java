@@ -1,13 +1,10 @@
 package com.festacompapel.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,25 +16,36 @@ public class Categoria implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long idCategoria;
+	private long id;
 
 	@NotNull
-	@Column(name = "nomeCategoria", unique = true)
+	@Column(name = "nome", unique = true)
 	private String nome;
 
 	@Size(max = 40)
-	@Column(name = "descricaoCategoria")
+	@Column(name = "descricao")
 	private String descricao;
 
-	@Column(name = "caminhoImagemCategoria")
+	@Column(name = "caminho_imagem")
 	private String caminhoImagemCategoria;
 
-	public long getIdCategoria() {
-		return idCategoria;
+	@Column(name = "data_criacao")
+	private Date dataCriacao;
+
+	@Enumerated(EnumType.STRING)
+	private StatusBasicos status;
+
+	@PrePersist
+	public void PrePersist(){
+		this.setStatus(StatusBasicos.ATIVO);
 	}
 
-	public void setIdCategoria(long idCategoria) {
-		this.idCategoria = idCategoria;
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -48,6 +56,14 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public String getCaminhoImagemCategoria() {
 		return caminhoImagemCategoria;
 	}
@@ -56,11 +72,32 @@ public class Categoria implements Serializable {
 		this.caminhoImagemCategoria = caminhoImagemCategoria;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Date getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public StatusBasicos getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusBasicos status) {
+		this.status = status;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Categoria categoria = (Categoria) o;
+		return id == categoria.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }

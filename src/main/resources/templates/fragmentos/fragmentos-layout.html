@@ -2,24 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FestaComPapel</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Cookie">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-<link rel="stylesheet" href="css/styles.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Festa Com Papel</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="../../vendor/iconfonts/mdi/css/materialdesignicons.min.css" th:href="@{vendor/iconfonts/mdi/css/materialdesignicons.min.css}">
+	<link rel="stylesheet" href="../../vendor/css/vendor.bundle.base.css" th:href="@{vendor/css/vendor.bundle.base.css}">
+	<link rel="stylesheet" href="../../vendor/css/vendor.bundle.addons.css" th:href="@{vendor/css/vendor.bundle.addons.css}">
+	<!-- endinject -->
+	<!-- plugin css for this page -->
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="../../static/css/style.css" th:href="@{css/style.css}">
+	<!-- endinject -->
+	<link rel="shortcut icon" href="images/favicon.png" />
 </head>
+
+<div th:fragment="scripts">
+	<!-- plugins:js -->
+	<script src="../../vendor/js/vendor.bundle.base.js" th:src="@{vendor/js/vendor.bundle.base.js}"></script>
+	<script src="../../vendor/js/vendor.bundle.addons.js" th:src="@{vendor/vendor.bundle.addons.js}"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page-->
+	<!-- End plugin js for this page-->
+	<!-- inject:js -->
+	<script src="../../static/js/off-canvas.js" th:src="@{js/off-canvas.js}"></script>
+	<script src="../../static/js/misc.js" th:src="@{js/misc.js}"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="../../static/js/dashboard.js" th:src="@{js/dashboard.js}"></script>
+	<!-- End custom js for this page-->
+
+</div>

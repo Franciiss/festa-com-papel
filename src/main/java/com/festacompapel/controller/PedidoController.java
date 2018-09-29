@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.festacompapel.service.ClienteService;
+import com.festacompapel.service.PedidoService;
+import com.festacompapel.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,37 +33,42 @@ public class PedidoController {
 	public static final String FORM_PEDIDO = "pedido/form-pedido";
 	public static final String LISTA_PEDIDO = "pedido/lista-pedidos";
 
-	@Autowired
-	PedidoRepository pedidoRepository;
+	private final PedidoService pedidoService;
+
+	private final ProdutoService produtoService;
+
+	private final ClienteService clienteService;
 
 	@Autowired
-	ProdutoRepository produtoRepository;
+	public PedidoController(PedidoService pedidoService, ProdutoService produtoService, ClienteService categoriaService){
+		this.pedidoService = pedidoService;
+		this.produtoService = produtoService;
+		this.clienteService = categoriaService;
+	}
 
-	@Autowired
-	ClienteRepository clienteRepository;
 
 	List<Produto> carrinho = new ArrayList<Produto>();
 
 	double valorTotal = 0;
 
 	@RequestMapping(value = "/lista-pedidos", method = RequestMethod.GET)
-	public ModelAndView listaPedidos(Pedido pedido) {
+	public ModelAndView listaPedidos() {
 		ModelAndView modelAndView = new ModelAndView(LISTA_PEDIDO);
-		modelAndView.addObject("pedidos", pedidoRepository.findAll());
+		modelAndView.addObject("pedidos", pedidoService.todos());
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/pedido/remover/{id}", method = RequestMethod.GET)
 	public String excluirPedido(@PathVariable("id") Pedido pedido) {
-		pedidoRepository.delete(pedido);
+		pedidoService.delete(pedido);
 		return "redirect:/lista-pedidos";
 	}
 
 	@RequestMapping(value = "/form-pedido", method = RequestMethod.GET)
 	public ModelAndView getFormulario(Pedido pedido) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
-		modelAndView.addObject("clientes", clienteRepository.findAll());
-		modelAndView.addObject("produtos", produtoRepository.findAll());
+		modelAndView.addObject("clientes", clienteService.todos());
+		modelAndView.addObject("produtos", produtoService.todos());
 		modelAndView.addObject("carrinho", this.carrinho);
 		modelAndView.addObject("valorTotal", valorTotal);
 		modelAndView.addObject("pedido", pedido);
@@ -92,10 +100,9 @@ public class PedidoController {
 
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
 
-		for (int i = 0; i < carrinho.size(); i++) {
-			if (carrinho.get(i).getNomeProduto().equals(produto.getNomeProduto())) {
-
-				carrinho.remove(i);
+		for (Produto p: carrinho) {
+			if(p.getNome().equals(produto.getNome())){
+				carrinho.remove(p);
 
 				double valTotal = 0;
 
@@ -121,7 +128,7 @@ public class PedidoController {
 		pedido.setValorPedido(valorTotal);
 
 		try {
-			pedidoRepository.save(pedido);
+			pedidoService.salva(pedido);
 			carrinho.clear();
 			valorTotal = 0;
 			return "redirect:/lista-pedidos";
@@ -135,10 +142,9 @@ public class PedidoController {
 	}
 
 	@RequestMapping(value = "/pedido/edicao/{id}", method = RequestMethod.GET)
-	public ModelAndView edicaoPedido(@PathVariable("id") Pedido pedido) {
+	public ModelAndView edicaoPedido(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
-		modelAndView.addObject("pedido", pedido);
-		pedidoRepository.saveAndFlush(pedido);
+		modelAndView.addObject("pedido", pedidoService.buscaPor(id));
 		return modelAndView;
 	}
 }

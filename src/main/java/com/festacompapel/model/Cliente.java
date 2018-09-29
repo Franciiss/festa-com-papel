@@ -1,15 +1,10 @@
 package com.festacompapel.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,153 +15,189 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idCliente")
-	private long idCliente;
+	@Column(name = "id")
+	private long id;
 
-	@Column(name = "nomeCliente")
+	@Column(name = "nome")
 	@NotNull
 	private String nome;
 
-	@Column(name = "sobreNome")
-	private String sobreNome;
+	@Column(name = "sobrenome")
+	private String sobrenome;
 
-	@Column(name = "nomeFormato")
+	@Column(name = "nome_formatado")
 	private String nomeFormato;
 
-	@Column(name = "ruaCliente")
+	@Column(name = "rua")
 	private String rua;
 
-	@Column(name = "numeroCliente")
+	@Column(name = "cliente")
 	private String numero;
 
-	@Column(name = "bairroCliente")
+	@Column(name = "bairro")
 	private String bairro;
 
-	@Column(name = "cidadeCliente")
+	@Column(name = "cidade")
 	private String cidade;
 
-	@Column(name = "estadoCliente")
-	private String estadoCliente;
+	@Column(name = "estado")
+	private String estado;
 
-	@Column(name = "celularCliente")
-	private String celularCliente;
+	@Column(name = "celular")
+	private String celular;
 
-	@Column(name = "telefoneCliente")
-	private String telefoneCliente;
+	@Column(name = "telefone")
+	private String telefone;
 
-	@Column(name = "emailCliente")
-	private String emailCliente;
+	@Column(name = "email")
+	private String email;
 
-	@Column(name = "cepCliente")
-	private String cepCliente;
+	@Column(name = "cep")
+	private String cep;
+
+	@Column(name = "data_cadastro")
+	private Date dataCadastro;
+
+    @Enumerated(EnumType.STRING)
+    private StatusBasicos status;
 
 	@PrePersist
-	@PreUpdate
 	private void prePersistUpdate() {
-		this.nomeFormato = this.nome + " " + this.sobreNome;
-	}
+		this.nomeFormato = this.nome + " " + this.sobrenome;
+		this.dataCadastro =  new Date();
+        this.setStatus(StatusBasicos.ATIVO);
+    }
 
-	public long getIdCliente() {
-		return idCliente;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setIdCliente(long idCliente) {
-		this.idCliente = idCliente;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getRua() {
-		return rua;
-	}
+    public String getSobrenome() {
+        return sobrenome;
+    }
 
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public String getNomeFormato() {
+        return nomeFormato;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setNomeFormato(String nomeFormato) {
+        this.nomeFormato = nomeFormato;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getRua() {
+        return rua;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getEstadoCliente() {
-		return estadoCliente;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setEstadoCliente(String estadoCliente) {
-		this.estadoCliente = estadoCliente;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public String getCelularCliente() {
-		return celularCliente;
-	}
+    public String getCidade() {
+        return cidade;
+    }
 
-	public void setCelularCliente(String celularCliente) {
-		this.celularCliente = celularCliente;
-	}
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 
-	public String getTelefoneCliente() {
-		return telefoneCliente;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public void setTelefoneCliente(String telefoneCliente) {
-		this.telefoneCliente = telefoneCliente;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-	public String getEmailCliente() {
-		return emailCliente;
-	}
+    public String getCelular() {
+        return celular;
+    }
 
-	public void setEmailCliente(String emailCliente) {
-		this.emailCliente = emailCliente;
-	}
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
 
-	public String getSobreNome() {
-		return sobreNome;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public String getCepCliente() {
-		return cepCliente;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setCepCliente(String cepCliente) {
-		this.cepCliente = cepCliente;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getNomeFormato() {
-		return nomeFormato;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public void setNomeFormato(String nomeFormato) {
-		this.nomeFormato = nomeFormato;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public StatusBasicos getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusBasicos status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return id == cliente.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

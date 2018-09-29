@@ -2,6 +2,7 @@ package com.festacompapel.controller;
 
 import javax.validation.Valid;
 
+import com.festacompapel.model.StatusBasicos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.festacompapel.model.Categoria;
 import com.festacompapel.service.CategoriaService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -50,21 +53,18 @@ public class CategoriaController {
 
 	@RequestMapping(value = "/categoria/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoCategoria(@PathVariable("id") Long id) {
-		Categoria categoria = categoriaService.buscaPor(id);
-
-		System.out.println(categoria.getIdCategoria());
-		System.out.println(categoria.getNome());
-		System.out.println(categoria.getDescricao());
-
-		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
-		modelAndView.addObject("categoria", categoria);
+	    ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
+		modelAndView.addObject("categoria",  categoriaService.buscaPor(id));
 
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/categoria/remover/{id}", method = RequestMethod.GET)
-	public String excluirCategoria(@PathVariable("id") Categoria categoria) {
-		categoriaService.delete(categoria);
+	public String excluirCategoria(@PathVariable("id") Long id) {
+
+		Categoria categoriaBanco = categoriaService.buscaPor(id);
+		categoriaBanco.setStatus(StatusBasicos.INATIVO);
+
 		return "redirect:/lista-categorias";
 	}
 }

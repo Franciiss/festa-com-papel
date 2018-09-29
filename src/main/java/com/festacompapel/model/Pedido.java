@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,37 +32,37 @@ public class Pedido implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idPedido")
-	private long idPedido;
+	@Column(name = "id")
+	private long id;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataPedido")
+	@Column(name = "data_pedido")
 	private Calendar dataDoPedido;
 
 	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	// @Temporal(TemporalType.DATE)
-	@Column(name = "dataEntregaPedido")
+	@Column(name = "data_entrega_Pedido")
 	private String dataEntregaPedido;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dataEntregaPedidoCalendar")
+	@Column(name = "data_entrega_pedido_Calendar")
 	private Calendar dataEntregaPedidoCalendar;
 
-	@Column(name = "fretePedido")
+	@Column(name = "frete_pedido")
 	private double frete;
 
-	@Column(name = "valorPedido")
+	@Column(name = "valor_pedido")
 	private double valorPedido;
 
-	@Column(name = "valorDoDesconto")
+	@Column(name = "valor_do_desconto")
 	private double valorDoDesconto;
 
-	@Column(name = "descontoPedido")
+	@Column(name = "desconto_pedido")
 	private double descontoPedido;
 
-	@Column(name = "valorTotal")
+	@Column(name = "valor_total")
 	private double valorTotal;
 
 	@Enumerated(EnumType.STRING)
@@ -108,16 +109,12 @@ public class Pedido implements Serializable {
 		return cal;
 	}
 
-	public long getIdPedido() {
-		return idPedido;
+	public long getId() {
+		return id;
 	}
 
-	public void setIdPedido(long idPedido) {
-		this.idPedido = idPedido;
-	}
-
-	public void setFrete(double frete) {
-		this.frete = frete;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public Calendar getDataDoPedido() {
@@ -136,32 +133,20 @@ public class Pedido implements Serializable {
 		this.dataEntregaPedido = dataEntregaPedido;
 	}
 
+	public Calendar getDataEntregaPedidoCalendar() {
+		return dataEntregaPedidoCalendar;
+	}
+
+	public void setDataEntregaPedidoCalendar(Calendar dataEntregaPedidoCalendar) {
+		this.dataEntregaPedidoCalendar = dataEntregaPedidoCalendar;
+	}
+
 	public double getFrete() {
 		return frete;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-
-	public double getDescontoPedido() {
-		return descontoPedido;
-	}
-
-	public void setDescontoPedido(double descontoPedido) {
-		this.descontoPedido = descontoPedido;
+	public void setFrete(double frete) {
+		this.frete = frete;
 	}
 
 	public double getValorPedido() {
@@ -180,12 +165,20 @@ public class Pedido implements Serializable {
 		this.valorDoDesconto = valorDoDesconto;
 	}
 
-	public Calendar getDataEntregaPedidoCalendar() {
-		return dataEntregaPedidoCalendar;
+	public double getDescontoPedido() {
+		return descontoPedido;
 	}
 
-	public void setDataEntregaPedidoCalendar(Calendar dataEntregaPedidoCalendar) {
-		this.dataEntregaPedidoCalendar = dataEntregaPedidoCalendar;
+	public void setDescontoPedido(double descontoPedido) {
+		this.descontoPedido = descontoPedido;
+	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	public StatusPedido getStatus() {
@@ -196,11 +189,32 @@ public class Pedido implements Serializable {
 		this.status = status;
 	}
 
-	public double getValorTotal() {
-		return valorTotal;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setValorTotal(double valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Pedido pedido = (Pedido) o;
+		return id == pedido.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }
