@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar" th:fragment="navbarLateral">
+        <ul class="nav">
+            <li class="nav-item nav-profile">
+                <div class="nav-link">
+                    <div class="user-wrapper">
+                        <div class="profile-image">
+                            <img src="images/faces/face1.jpg" alt="profile image">
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Richard V.Welsh</p>
+                            <div>
+                                <small class="designation text-muted">Manager</small>
+                                <span class="status-indicator online"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/form-pedido" style="text-decoration: none">
+                        <button class="btn btn-success btn-block">Nova venda
+                            <i class="mdi mdi-plus"></i>
+                        </button></a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="menu-icon mdi mdi-television"></i>
+                    <span class="menu-title">Painel de Controle</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#menuVendas" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-content-copy"></i>
+                    <span class="menu-title">Pedido Vendas</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="menuVendas">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/form-pedido">Cadastrar Venda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lista-pedidos">Listar Vendas</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#menuClientes" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-content-copy"></i>
+                    <span class="menu-title">Clientes</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="menuClientes">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/form-cliente">Cadastrar Cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lista-clientes">Listar Clientes</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#menuProdutos" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-content-copy"></i>
+                    <span class="menu-title">Produtos</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="menuProdutos">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/form-produto">Cadastrar Produtos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lista-produtos">Listar Produtos</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#menuCategorias" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="menu-icon mdi mdi-content-copy"></i>
+                    <span class="menu-title">Categorias</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="menuCategorias">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/form-categoria">Cadastrar Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lista-categorias">Listar Categorias</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">
+                    <i class="menu-icon mdi mdi-sale"></i>
+                    <span class="menu-title">Relatórios de Vendas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lixeira">
+                    <i class="menu-icon mdi mdi-view-week"></i>
+                    <span class="menu-title">Lixeira</span>
+                </a>
+            </li>
+        </ul>
+</nav>

@@ -69,11 +69,11 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    public double getValorUnitario() {
+    private double getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(double valorUnitario) {
+    private void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 

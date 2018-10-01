@@ -21,8 +21,8 @@ import java.util.List;
 @SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })
 public class PedidoController {
 
-	public static final String FORM_PEDIDO = "pedido/form-pedido";
-	public static final String LISTA_PEDIDO = "pedido/lista-pedidos";
+	private static final String FORM_PEDIDO = "pedido/form-pedido";
+	private static final String LISTA_PEDIDO = "pedido/lista-pedidos";
 
 	private final PedidoService pedidoService;
 
