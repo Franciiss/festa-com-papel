@@ -1,175 +1,369 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="fragmentos/fragmentos-layout :: head"></head>
-
+<head th:insert="fragmentos/fragmentos-layout :: head"></head>
 
 <body>
-
-<div th:replace="fragmentos/fragmentos-layout :: navbar"></div>
-
-
-	<form th:action="@{/form-pedido}" th:object="${pedido}" method="post">
-		<div class="container profile profile-view" id="profile">
-			<div class="form-row profile-row">
-				<div class="col-md-8 col-lg-12 offset-lg-0">
-					<h1>Produto</h1>
-					<div class="form-group">
-						<select class="form-control" th:field="*{produtos}"><optgroup>
-								<option th:each="produto : ${produtos}"
-									th:value="${produto.id}"
-									th:text="${produto.nome}"></option>
-							</optgroup></select>
-					</div>
-					<div class="form-row">
-						<div class="col-md-12 content-right">
-							<button class="btn btn-primary form-btn" type="submit">Adicionar</button>
+<div class="container-scroller">
+	<!-- partial:../../partials/_navbar.html -->
+	<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+		<div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+			<a class="navbar-brand brand-logo" href="../../index.html">
+				<img src="../../images/logo.svg" alt="logo"/>
+			</a>
+			<a class="navbar-brand brand-logo-mini" href="../../index.html">
+				<img src="../../images/logo-mini.svg" alt="logo"/>
+			</a>
+		</div>
+		<div class="navbar-menu-wrapper d-flex align-items-center">
+			<ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+				<li class="nav-item">
+					<a href="#" class="nav-link">Schedule
+						<span class="badge badge-primary ml-1">New</span>
+					</a>
+				</li>
+				<li class="nav-item active">
+					<a href="#" class="nav-link">
+						<i class="mdi mdi-elevation-rise"></i>Reports</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav navbar-nav-right">
+				<li class="nav-item dropdown">
+					<a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+					   data-toggle="dropdown" aria-expanded="false">
+						<i class="mdi mdi-file-document-box"></i>
+						<span class="count">7</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+						 aria-labelledby="messageDropdown">
+						<div class="dropdown-item">
+							<p class="mb-0 font-weight-normal float-left">You have 7 unread mails
+							</p>
+							<span class="badge badge-info badge-pill float-right">View all</span>
 						</div>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<img src="../../images/faces/face4.jpg" alt="image" class="profile-pic">
+							</div>
+							<div class="preview-item-content flex-grow">
+								<h6 class="preview-subject ellipsis font-weight-medium text-dark">David Grey
+									<span class="float-right font-weight-light small-text">1 Minutes ago</span>
+								</h6>
+								<p class="font-weight-light small-text">
+									The meeting is cancelled
+								</p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<img src="../../images/faces/face2.jpg" alt="image" class="profile-pic">
+							</div>
+							<div class="preview-item-content flex-grow">
+								<h6 class="preview-subject ellipsis font-weight-medium text-dark">Tim Cook
+									<span class="float-right font-weight-light small-text">15 Minutes ago</span>
+								</h6>
+								<p class="font-weight-light small-text">
+									New product launch
+								</p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<img src="../../images/faces/face3.jpg" alt="image" class="profile-pic">
+							</div>
+							<div class="preview-item-content flex-grow">
+								<h6 class="preview-subject ellipsis font-weight-medium text-dark"> Johnson
+									<span class="float-right font-weight-light small-text">18 Minutes ago</span>
+								</h6>
+								<p class="font-weight-light small-text">
+									Upcoming board meeting
+								</p>
+							</div>
+						</a>
 					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+					   data-toggle="dropdown">
+						<i class="mdi mdi-bell"></i>
+						<span class="count">4</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+						 aria-labelledby="notificationDropdown">
+						<a class="dropdown-item">
+							<p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+							</p>
+							<span class="badge badge-pill badge-warning float-right">View all</span>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-success">
+									<i class="mdi mdi-alert-circle-outline mx-0"></i>
+								</div>
+							</div>
+							<div class="preview-item-content">
+								<h6 class="preview-subject font-weight-medium text-dark">Application Error</h6>
+								<p class="font-weight-light small-text">
+									Just now
+								</p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-warning">
+									<i class="mdi mdi-comment-text-outline mx-0"></i>
+								</div>
+							</div>
+							<div class="preview-item-content">
+								<h6 class="preview-subject font-weight-medium text-dark">Settings</h6>
+								<p class="font-weight-light small-text">
+									Private message
+								</p>
+							</div>
+						</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item preview-item">
+							<div class="preview-thumbnail">
+								<div class="preview-icon bg-info">
+									<i class="mdi mdi-email-outline mx-0"></i>
+								</div>
+							</div>
+							<div class="preview-item-content">
+								<h6 class="preview-subject font-weight-medium text-dark">New user registration</h6>
+								<p class="font-weight-light small-text">
+									2 days ago
+								</p>
+							</div>
+						</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown d-none d-xl-inline-block">
+					<a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+					   aria-expanded="false">
+						<span class="profile-text">Hello, Richard V.Welsh !</span>
+						<img class="img-xs rounded-circle" src="../../images/faces/face1.jpg" alt="Profile image">
+					</a>
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+						<a class="dropdown-item p-0">
+							<div class="d-flex border-bottom">
+								<div class="py-3 px-4 d-flex align-items-center justify-content-center">
+									<i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
+								</div>
+								<div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+									<i class="mdi mdi-account-outline mr-0 text-gray"></i>
+								</div>
+								<div class="py-3 px-4 d-flex align-items-center justify-content-center">
+									<i class="mdi mdi-alarm-check mr-0 text-gray"></i>
+								</div>
+							</div>
+						</a>
+						<a class="dropdown-item mt-2">
+							Manage Accounts
+						</a>
+						<a class="dropdown-item">
+							Change Password
+						</a>
+						<a class="dropdown-item">
+							Check Inbox
+						</a>
+						<a class="dropdown-item">
+							Sign Out
+						</a>
+					</div>
+				</li>
+			</ul>
+			<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+					data-toggle="offcanvas">
+				<span class="mdi mdi-menu"></span>
+			</button>
+		</div>
+	</nav>
+	<!-- partial -->
+	<div class="container-fluid page-body-wrapper">
+
+		<nav th:insert="fragmentos/fragmentos-menus :: navbarLateral"></nav>
+
+		<!-- partial -->
+		<div class="main-panel">
+			<div class="content-wrapper">
+				<div class="row">
+					<div class="col-12 grid-margin">
+						<form th:action="@{/form-pedido}" th:object="${pedido}" method="post">
+										<h1>Produto</h1>
+										<div class="form-group">
+											<select class="form-control" th:field="*{produtos}"><optgroup>
+												<option th:each="produto : ${produtos}"
+														th:value="${produto.id}"
+														th:text="${produto.nome}"></option>
+											</optgroup></select>
+										</div>
+										<div class="form-row">
+											<div class="col-md-12 content-right">
+												<button class="btn btn-primary form-btn" type="submit">Adicionar</button>
+											</div>
+										</div>
+						</form>
+							</div>
+
+							<div class="row">
+								<div class="col-12 grid-margin">
+									<div class="form-group">
+										<h1>Produtos Selecionados</h1>
+										<div class="table-responsive">
+											<table class="table">
+												<thead>
+												<tr>
+													<th>Nome</th>
+													<th>Quantidade</th>
+													<th>Preço</th>
+													<th></th>
+													<th></th>
+												</tr>
+												</thead>
+												<th:block th:each="produtoCarrinho : ${carrinho}">
+													<tr>
+														<td th:text="${produtoCarrinho.nome}"></td>
+														<td th:text="${produtoCarrinho.quantidade}"></td>
+														<td th:text="${produtoCarrinho.preco}"></td>
+														<td></td>
+														<td>
+															<form method="POST"
+																  th:action="@{/form-pedido/remover/{id}(id=${produtoCarrinho.id})}">
+																<button type="submit" style="color: red">X</button>
+															</form>
+													</tr>
+												</th:block>
+											</table>
+										</div>
+									</div>
+
+
+									<form th:action="@{/salva-pedido}" th:object="${pedido}" method="post">
+										<div class="container profile profile-view" id="profile">
+											<div class="form-row profile-row">
+												<div class="col-md-8 col-lg-12 offset-lg-0">
+													<h1>Pedido</h1>
+													<hr>
+													<div class="form-group">
+														<label>Cliente</label>
+														<select class="form-control"
+																th:field="*{cliente.id}"><optgroup>
+															<option th:each="cliente : ${clientes}"
+																	th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+														</optgroup></select>
+													</div>
+
+													<hr>
+													<div class="form-row">
+														<div class="col-sm-12 col-md-2">
+															<div class="form-group">
+																<label>Desconto</label><input class="form-control" name="descontoPedido"
+																							  id="campoDesconto" th:field="*{descontoPedido}" type="number"
+																							  onChange="calculaDesconto(this.value)">
+															</div>
+														</div>
+													</div>
+
+													<script>
+                                                        function calculaDesconto(val){
+                                                            var valorSemDesconto = document.getElementById("valorSemDesconto").innerHTML;
+                                                            if(val > 100){
+                                                                alert("NÃO SE DÁ DESCONTO MAIOR QUE 100%");
+                                                                document.getElementById("campoDesconto").innerHTML = 0;
+                                                                location.reload(true);
+                                                            } else {
+                                                                var desconto = (val / 100) * valorSemDesconto;
+                                                                var valorComDesconto = valorSemDesconto - desconto;
+                                                                document.getElementById("ValorDoDesconto").innerHTML = desconto;
+                                                                document.getElementById("valorTotal").innerHTML = valorComDesconto;
+                                                            }
+                                                        }
+													</script>
+
+													<div class="form-row">
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label><strong>SubTotal</strong></label>
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label th:text="${valorTotal}" id="valorSemDesconto"
+																	   class="float-right">XXXX</label>
+															</div>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label><strong>Desconto</strong></label>
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label id="ValorDoDesconto" class="float-right"></label>
+															</div>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label><strong>Total</strong></label>
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label id="valorTotal" class="float-right"></label>
+															</div>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label>Data de Entrega</label><input class="form-control" name="dataEntregaPedido"
+																									 th:field="*{dataEntregaPedido}" type="date" required>
+															</div>
+														</div>
+														<div class="col-sm-12 col-md-6">
+															<div class="form-group">
+																<label>Valor do frete:</label><input class="form-control"
+																									 th:field="*{frete}" type="text" name="frete">
+															</div>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-12 content-right">
+															<button class="btn btn-primary form-btn" type="submit">Salvar</button>
+															<button class="btn btn-danger form-btn" type="reset">Limpar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+					<div th:insert="fragmentos/fragmentos-footer :: footer"></div>
 				</div>
 			</div>
 		</div>
-	</form>
 
-	<div class="container profile profile-view" id="profile">
-		<div class="form-row profile-row">
-			<div class="col-md-8 col-lg-12 offset-lg-0">
-				<div class="form-row"></div>
-				<div class="form-group">
-					<h1>Produtos Selecionados</h1>
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Nome</th>
-									<th>Quantidade</th>
-									<th>Preço</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<th:block th:each="produtoCarrinho : ${carrinho}">
-								<tr>
-									<td th:text="${produtoCarrinho.nome}"></td>
-									<td th:text="${produtoCarrinho.quantidadeProduto}"></td>
-									<td th:text="${produtoCarrinho.precoProduto}"></td>
-									<td></td>
-									<td>
-										<form method="POST"
-											th:action="@{/form-pedido/remover/{id}(id=${produtoCarrinho.id})}">
-											<button type="submit" style="color: red">X</button>
-										</form>
-								</tr>
-							</th:block>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<form th:action="@{/salva-pedido}" th:object="${pedido}" method="post">
-		<div class="container profile profile-view" id="profile">
-			<div class="form-row profile-row">
-				<div class="col-md-8 col-lg-12 offset-lg-0">
-					<h1>Pedido</h1>
-					<hr>
-					<div class="form-group">
-						<label>Cliente</label><select class="form-control"
-							th:field="*{cliente.id}"><optgroup>
-								<option th:each="cliente : ${clientes}"
-									th:value="${cliente.id}" th:text="${cliente.nome}"></option>
-							</optgroup></select>
-					</div>
-
-					<hr>
-					<div class="form-row">
-						<div class="col-sm-12 col-md-2">
-							<div class="form-group">
-								<label>Desconto</label><input class="form-control" name="descontoPedido"
-									id="campoDesconto" th:field="*{descontoPedido}" type="number"
-									onChange="calculaDesconto(this.value)">
-							</div>
-						</div>
-					</div>
-
-					<script>
-					function calculaDesconto(val){
-						var valorSemDesconto = document.getElementById("valorSemDesconto").innerHTML;
-						if(val > 100){
-							alert("NÃO SE DÁ DESCONTO MAIOR QUE 100%");
-							document.getElementById("campoDesconto").innerHTML = 0;
-							location.reload(true);
-						} else {
-						var desconto = (val / 100) * valorSemDesconto;
-						var valorComDesconto = valorSemDesconto - desconto;
-						document.getElementById("ValorDoDesconto").innerHTML = desconto;
-						document.getElementById("valorTotal").innerHTML = valorComDesconto;
-						}
-					}
-					</script>
-
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label><strong>SubTotal</strong></label>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label th:text="${valorTotal}" id="valorSemDesconto"
-									class="float-right">XXXX</label>
-							</div>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label><strong>Desconto</strong></label>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label id="ValorDoDesconto" class="float-right"></label>
-							</div>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label><strong>Total</strong></label>
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label id="valorTotal" class="float-right"></label>
-							</div>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>Data de Entrega</label><input class="form-control" name="dataEntregaPedido"
-									th:field="*{dataEntregaPedido}" type="date">
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>Valor do frete:</label><input class="form-control"
-									th:field="*{frete}" type="text" name="frete">
-							</div>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col-md-12 content-right">
-							<button class="btn btn-primary form-btn" type="submit">Salvar</button>
-							<button class="btn btn-danger form-btn" type="reset">Limpar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
+		<div th:insert="fragmentos/fragmentos-layout :: scripts"></div>
 
 </body>
 

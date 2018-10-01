@@ -1,12 +1,11 @@
 package com.festacompapel.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Categoria")
@@ -26,8 +25,8 @@ public class Categoria implements Serializable {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@Column(name = "caminho_imagem")
-	private String caminhoImagemCategoria;
+	@Column(name = "imagem")
+	private String imagem;
 
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
@@ -38,7 +37,17 @@ public class Categoria implements Serializable {
 	@PrePersist
 	public void PrePersist(){
 		this.setStatus(StatusBasicos.ATIVO);
+		this.dataCriacao = new Date();
+
+		if(this.descricao == null){
+			this.descricao = "Categoria destinada à " + nome + "s";
+		}
 	}
+
+	@PreUpdate
+    public void PreUpdate(){
+
+    }
 
 	public long getId() {
 		return id;
@@ -64,15 +73,15 @@ public class Categoria implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getCaminhoImagemCategoria() {
-		return caminhoImagemCategoria;
-	}
+    public String getImagem() {
+        return imagem;
+    }
 
-	public void setCaminhoImagemCategoria(String caminhoImagemCategoria) {
-		this.caminhoImagemCategoria = caminhoImagemCategoria;
-	}
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 
-	public Date getDataCriacao() {
+    public Date getDataCriacao() {
 		return dataCriacao;
 	}
 

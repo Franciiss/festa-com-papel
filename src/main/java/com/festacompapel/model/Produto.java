@@ -1,11 +1,10 @@
 package com.festacompapel.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Produto")
@@ -26,15 +25,15 @@ public class Produto implements Serializable {
 	private double valorUnitario;
 
 	@NotNull
-	@Column(name = "preco_produto")
-	private double precoProduto;
+	@Column(name = "preco")
+	private double preco;
 
 	@NotNull
-	@Column(name = "quantidade_roduto")
-	private int quantidadeProduto;
+	@Column(name = "quantidade")
+	private int quantidade;
 
-	@Column(name = "descricao_produto")
-	private String descricaoProduto;
+	@Column(name = "descricao")
+	private String descricao;
 
 	@Column(name = "data_criacao")
 	private Date dataCriacao;
@@ -45,11 +44,13 @@ public class Produto implements Serializable {
     @Enumerated(EnumType.STRING)
     private StatusBasicos status;
 
+    @Column(name = "imagem")
+    private String imagem;
+
 	@PrePersist
-	@PreUpdate
 	private void prePersistUpdate() {
 	    this.setStatus(StatusBasicos.ATIVO);
-		this.setValorUnitario(this.precoProduto / this.quantidadeProduto);
+		this.setValorUnitario(this.preco / this.quantidade);
 	}
 
     public long getId() {
@@ -76,28 +77,28 @@ public class Produto implements Serializable {
         this.valorUnitario = valorUnitario;
     }
 
-    public double getPrecoProduto() {
-        return precoProduto;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setPrecoProduto(double precoProduto) {
-        this.precoProduto = precoProduto;
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
-    public int getQuantidadeProduto() {
-        return quantidadeProduto;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQuantidadeProduto(int quantidadeProduto) {
-        this.quantidadeProduto = quantidadeProduto;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public String getDescricaoProduto() {
-        return descricaoProduto;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoProduto(String descricaoProduto) {
-        this.descricaoProduto = descricaoProduto;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Date getDataCriacao() {
@@ -122,6 +123,14 @@ public class Produto implements Serializable {
 
     public void setStatus(StatusBasicos status) {
         this.status = status;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     @Override

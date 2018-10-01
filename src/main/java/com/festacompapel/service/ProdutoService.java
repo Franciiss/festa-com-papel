@@ -1,15 +1,15 @@
 package com.festacompapel.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
+import com.festacompapel.model.Produto;
+import com.festacompapel.model.StatusBasicos;
+import com.festacompapel.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.festacompapel.model.Produto;
-import com.festacompapel.repository.ProdutoRepository;
+import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -49,6 +49,25 @@ public class ProdutoService {
 			produtoRepository.flush();
 		} else {
 			throw new IllegalArgumentException("Informe um produto válida para exclusão");
+		}
+	}
+
+	public Collection<Produto> findAllByStatus(StatusBasicos statusBasicos) {
+		return produtoRepository.findAllByStatus(statusBasicos);
+	}
+
+
+	@Transactional
+	public void atualizarStatus(Long id, StatusBasicos statusBasicos) {
+
+		if (id != null) {
+
+			Produto produto = this.buscaPor(id);
+			produto.setStatus(statusBasicos);
+			this.salva(produto);
+
+		} else {
+			throw new IllegalArgumentException("Informe um produto válido");
 		}
 	}
 

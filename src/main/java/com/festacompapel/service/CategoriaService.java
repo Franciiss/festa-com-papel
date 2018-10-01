@@ -1,15 +1,15 @@
 package com.festacompapel.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
+import com.festacompapel.model.Categoria;
+import com.festacompapel.model.StatusBasicos;
+import com.festacompapel.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.festacompapel.model.Categoria;
-import com.festacompapel.repository.CategoriaRepository;
+import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -55,5 +55,23 @@ public class CategoriaService {
 			throw new IllegalArgumentException("Informe uma categoria válida para exclusão");
 		}
 	}
+
+	public Collection<Categoria> findAllByStatus(StatusBasicos statusBasicos){
+		return categoriaRepository.findAllByStatus(statusBasicos);
+	}
+
+    @Transactional
+    public void atualizarStatus(Long id, StatusBasicos statusBasicos) {
+
+        if (id != null) {
+
+            Categoria categoria = this.buscaPor(id);
+            categoria.setStatus(statusBasicos);
+            this.salva(categoria);
+
+        } else {
+            throw new IllegalArgumentException("Informe uma categoria válida");
+        }
+    }
 
 }

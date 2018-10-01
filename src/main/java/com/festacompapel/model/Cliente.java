@@ -1,11 +1,10 @@
 package com.festacompapel.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Cliente")
@@ -26,12 +25,12 @@ public class Cliente implements Serializable {
 	private String sobrenome;
 
 	@Column(name = "nome_formatado")
-	private String nomeFormato;
+	private String nomeFormatado;
 
 	@Column(name = "rua")
 	private String rua;
 
-	@Column(name = "cliente")
+	@Column(name = "numero")
 	private String numero;
 
 	@Column(name = "bairro")
@@ -55,17 +54,44 @@ public class Cliente implements Serializable {
 	@Column(name = "cep")
 	private String cep;
 
+	@Column(name = "sexo")
+    private String sexo;
+
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
+
+    @Column(name = "imagem")
+    private String imagem;
 
     @Enumerated(EnumType.STRING)
     private StatusBasicos status;
 
+    @Column
+    private String endereco;
+
 	@PrePersist
-	private void prePersistUpdate() {
-		this.nomeFormato = this.nome + " " + this.sobrenome;
+	private void prePresist() {
+	    if(this.rua.isEmpty() && this.numero.isEmpty() && this.bairro.isEmpty() ){
+
+        } else {
+            this.endereco = this.rua + ", número " + this.numero + ", " + this.bairro;
+        }
+		this.nomeFormatado = this.nome + " " + this.sobrenome;
 		this.dataCadastro =  new Date();
         this.setStatus(StatusBasicos.ATIVO);
+        this.cidade = "São Luís";
+        this.estado = "Maranhão";
+    }
+
+    @PreUpdate
+    public void PreUpdate(){
+        this.nomeFormatado = this.nome + " " + this.sobrenome;
+
+        if(this.rua.isEmpty() && this.numero.isEmpty() && this.bairro.isEmpty() ){
+
+        } else {
+            this.endereco = this.rua + ", número " + this.numero + ", " + this.bairro;
+        }
     }
 
     public long getId() {
@@ -92,12 +118,12 @@ public class Cliente implements Serializable {
         this.sobrenome = sobrenome;
     }
 
-    public String getNomeFormato() {
-        return nomeFormato;
+    public String getNomeFormatado() {
+        return nomeFormatado;
     }
 
-    public void setNomeFormato(String nomeFormato) {
-        this.nomeFormato = nomeFormato;
+    public void setNomeFormatado(String nomeFormatado) {
+        this.nomeFormatado = nomeFormatado;
     }
 
     public String getRua() {
@@ -186,6 +212,30 @@ public class Cliente implements Serializable {
 
     public void setStatus(StatusBasicos status) {
         this.status = status;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     @Override

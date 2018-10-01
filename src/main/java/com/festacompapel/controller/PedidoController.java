@@ -1,30 +1,21 @@
 package com.festacompapel.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
+import com.festacompapel.model.Pedido;
+import com.festacompapel.model.Produto;
+import com.festacompapel.model.StatusBasicos;
 import com.festacompapel.service.ClienteService;
 import com.festacompapel.service.PedidoService;
 import com.festacompapel.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.festacompapel.model.Pedido;
-import com.festacompapel.model.Produto;
-import com.festacompapel.repository.ClienteRepository;
-import com.festacompapel.repository.PedidoRepository;
-import com.festacompapel.repository.ProdutoRepository;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @SessionAttributes(value = { "clientes", "produtos", "carrinho", "valorTotal" })
@@ -65,13 +56,12 @@ public class PedidoController {
 	}
 
 	@RequestMapping(value = "/form-pedido", method = RequestMethod.GET)
-	public ModelAndView getFormulario(Pedido pedido) {
+	public ModelAndView adicionarPedido(Pedido pedido) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
 		modelAndView.addObject("clientes", clienteService.todos());
 		modelAndView.addObject("produtos", produtoService.todos());
 		modelAndView.addObject("carrinho", this.carrinho);
 		modelAndView.addObject("valorTotal", valorTotal);
-		modelAndView.addObject("pedido", pedido);
 		return modelAndView;
 	}
 
@@ -85,7 +75,7 @@ public class PedidoController {
 		double valTotal = 0;
 
 		for (Produto produto : carrinho) {
-			valTotal += produto.getPrecoProduto();
+			valTotal += produto.getPreco();
 		}
 
 		modelAndView.addObject("valorTotal", valTotal);
@@ -107,7 +97,7 @@ public class PedidoController {
 				double valTotal = 0;
 
 				for (Produto produto2 : carrinho) {
-					valTotal += produto2.getPrecoProduto();
+					valTotal += produto2.getPreco();
 				}
 
 				modelAndView.addObject("valorTotal", valTotal);
@@ -144,6 +134,10 @@ public class PedidoController {
 	@RequestMapping(value = "/pedido/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoPedido(@PathVariable("id") Long id) {
 		ModelAndView modelAndView = new ModelAndView(FORM_PEDIDO);
+		modelAndView.addObject("clientes", clienteService.findAllByStatus(StatusBasicos.ATIVO));
+		modelAndView.addObject("produtos", produtoService.findAllByStatus(StatusBasicos.ATIVO));
+		modelAndView.addObject("carrinho", this.carrinho);
+		modelAndView.addObject("valorTotal", valorTotal);
 		modelAndView.addObject("pedido", pedidoService.buscaPor(id));
 		return modelAndView;
 	}

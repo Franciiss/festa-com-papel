@@ -1,80 +1,356 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="fragmentos/fragmentos-layout :: head"></head>
+<head th:insert="fragmentos/fragmentos-layout :: head"></head>
 
 <body>
+<div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+            <a class="navbar-brand brand-logo" href="../../index.html">
+                <img src="../../images/logo.svg" alt="logo"/>
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="../../index.html">
+                <img src="../../images/logo-mini.svg" alt="logo"/>
+            </a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+            <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Schedule
+                        <span class="badge badge-primary ml-1">New</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="#" class="nav-link">
+                        <i class="mdi mdi-elevation-rise"></i>Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+                       data-toggle="dropdown" aria-expanded="false">
+                        <i class="mdi mdi-file-document-box"></i>
+                        <span class="count">7</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                         aria-labelledby="messageDropdown">
+                        <div class="dropdown-item">
+                            <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
+                            </p>
+                            <span class="badge badge-info badge-pill float-right">View all</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-medium text-dark">David Grey
+                                    <span class="float-right font-weight-light small-text">1 Minutes ago</span>
+                                </h6>
+                                <p class="font-weight-light small-text">
+                                    The meeting is cancelled
+                                </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="../../images/faces/face2.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-medium text-dark">Tim Cook
+                                    <span class="float-right font-weight-light small-text">15 Minutes ago</span>
+                                </h6>
+                                <p class="font-weight-light small-text">
+                                    New product launch
+                                </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="../../images/faces/face3.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-medium text-dark"> Johnson
+                                    <span class="float-right font-weight-light small-text">18 Minutes ago</span>
+                                </h6>
+                                <p class="font-weight-light small-text">
+                                    Upcoming board meeting
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                       data-toggle="dropdown">
+                        <i class="mdi mdi-bell"></i>
+                        <span class="count">4</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                         aria-labelledby="notificationDropdown">
+                        <a class="dropdown-item">
+                            <p class="mb-0 font-weight-normal float-left">You have 4 new notifications
+                            </p>
+                            <span class="badge badge-pill badge-warning float-right">View all</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-success">
+                                    <i class="mdi mdi-alert-circle-outline mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-medium text-dark">Application Error</h6>
+                                <p class="font-weight-light small-text">
+                                    Just now
+                                </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-warning">
+                                    <i class="mdi mdi-comment-text-outline mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-medium text-dark">Settings</h6>
+                                <p class="font-weight-light small-text">
+                                    Private message
+                                </p>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-info">
+                                    <i class="mdi mdi-email-outline mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-medium text-dark">New user registration</h6>
+                                <p class="font-weight-light small-text">
+                                    2 days ago
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown d-none d-xl-inline-block">
+                    <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+                       aria-expanded="false">
+                        <span class="profile-text">Hello, Richard V.Welsh !</span>
+                        <img class="img-xs rounded-circle" src="../../images/faces/face1.jpg" alt="Profile image">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                        <a class="dropdown-item p-0">
+                            <div class="d-flex border-bottom">
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <i class="mdi mdi-bookmark-plus-outline mr-0 text-gray"></i>
+                                </div>
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center border-left border-right">
+                                    <i class="mdi mdi-account-outline mr-0 text-gray"></i>
+                                </div>
+                                <div class="py-3 px-4 d-flex align-items-center justify-content-center">
+                                    <i class="mdi mdi-alarm-check mr-0 text-gray"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item mt-2">
+                            Manage Accounts
+                        </a>
+                        <a class="dropdown-item">
+                            Change Password
+                        </a>
+                        <a class="dropdown-item">
+                            Check Inbox
+                        </a>
+                        <a class="dropdown-item">
+                            Sign Out
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
 
-<div th:replace="fragmentos/fragmentos-layout :: navbar"></div>
+        <nav th:insert="fragmentos/fragmentos-menus :: navbarLateral"></nav>
+
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-12 grid-margin">
+                        <form th:action="@{/form-cliente/salva}" th:object="${cliente}"
+                              method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" th:value="${cliente.id}"/>
+                            <input type="hidden" name="cidade" th:value="${cliente.cidade}"/>
+                            <input type="hidden" name="endereco" th:value="${cliente.endereco}"/>
+                            <input type="hidden" name="estado" th:value="${cliente.estado}"/>
+                            <input type="hidden" name="nomeFormatado" th:value="${cliente.nomeFormatado}"/>
+                            <input type="hidden" name="status" th:value="${cliente.status}"/>
 
 
-	<form th:action="@{/form-cliente}" th:object="${cliente}" method="post">
-		<div class="container profile profile-view" id="profile">
-			<div class="form-row profile-row">
-				<div class="col-md-4 relative">
-					<div class="avatar">
-						<div class="avatar-bg center"></div>
-					</div>
-					<input type="file" class="form-control" name="avatar-file">
-				</div>
-				<div class="col-md-8">
-					<h1>Cliente</h1>
-					<hr>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Cadastro de Clientes</h4>
+                                    <form class="form-sample">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Nome</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.nome}" name="nome"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Sobrenome</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.sobrenome}"
+                                                               name="sobrenome" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Sexo</label>
+                                                    <div class="col-sm-9">
+                                                        <select th:field="${cliente.sexo}" name="sexo"
+                                                                class="form-control">
+                                                            <option th:value="'Masculino'">Masculino</option>
+                                                            <option th:value="Feminino">Feminino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-description">
+                                            Contato
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Celular</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.celular}" name="celular"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Telefone</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.telefone}"
+                                                               name="telefone" class="form-control" label="Maranhão"
+                                                               value="Maranhão">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.email}" name="email"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-description">
+                                            Endereço
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Rua</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.rua}" name="rua"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Número</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.numero}" name="numero"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Bairro</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.bairro}" name="bairro"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">CEP</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" th:value="${cliente.cep}" name="cep"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Imagem</label>
+                                            <input type="file" name="uploadFile" class="file-upload-default">
+                                            <div class="input-group col-xs-12">
+                                                <input type="text" class="form-control file-upload-info" disabled
+                                                       placeholder="Upload Image">
+                                                <span class="input-group-append">
+                                                <input class="file-upload-browse btn btn-info" name="arquivo" type="file"></input>
+                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-success mr-2">Submit</button>
+                                                <button type="reset" class="btn btn-light">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div th:insert="fragmentos/fragmentos-footer :: footer"></div>
+                </div>
+            </div>
+        </div>
 
-					<input type="hidden" name="id"
-						th:value="${cliente.id}" />
-
-
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>Nome</label><input class="form-control" type="text"
-									name="nome" th:value="${cliente.nome}">
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>SobreNome</label><input class="form-control" type="text"
-									name="sobrenome" th:value="${cliente.sobrenome}">
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Email </label><input class="form-control" type="email"
-							name="email"
-							th:value="${cliente.email}">
-					</div>
-					<div class="form-row">
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>Telefone</label><input class="form-control" type="tel"
-									name="telefone" th:value="${cliente.telefone}"
-									autocomplete="off">
-							</div>
-						</div>
-						<div class="col-sm-12 col-md-6">
-							<div class="form-group">
-								<label>CEP</label><input class="form-control" type="text"
-									name="cep" th:value="${cliente.cep}"
-									autocomplete="off">
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="form-row">
-						<div class="col-md-12 content-right">
-							<input class="btn btn-primary form-btn" type="submit"
-								value="submit" name="submit">
-							<button class="btn btn-danger form-btn" type="reset">Limpar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</form>
-
-<div th:replace="fragmentos/fragmentos-footer :: footer"></div>
+        <div th:insert="fragmentos/fragmentos-layout :: scripts"></div>
 
 </body>
 
