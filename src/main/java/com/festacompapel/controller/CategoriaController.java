@@ -6,13 +6,11 @@ import com.festacompapel.model.StatusBasicos;
 import com.festacompapel.service.CategoriaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,7 +33,7 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(value = "/form-categoria", method = RequestMethod.GET)
-	public ModelAndView formCategoria(Categoria categoria) {
+	public ModelAndView formCategoria(Categoria categoria, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
 		return modelAndView;
 	}
@@ -48,7 +46,7 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(value = "/form-categoria/salva", method = RequestMethod.POST)
-	public String postFormulario(@Valid Categoria categoria, BindingResult bindingResult, @RequestParam(value = "arquivo", required = false) MultipartFile arquivo) {
+	public String postFormulario(@Valid Categoria categoria, BindingResult bindingResult, @RequestParam(value = "arquivo", required = false) MultipartFile arquivo, HttpServletRequest request){
 
 		if (bindingResult.hasErrors()) {
 			return FORM_CATEGORIA;
@@ -72,14 +70,18 @@ public class CategoriaController {
         }
 
 		categoriaService.salva(categoria);
+        request.getSession().removeAttribute("categoria");
 
-		return "redirect:/lista-categorias";
+
+        return "redirect:/lista-categorias";
 	}
 
 	@RequestMapping(value = "/categoria/edicao/{id}", method = RequestMethod.GET)
 	public ModelAndView edicaoCategoria(@PathVariable("id") Long id) {
+
         ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
         modelAndView.addObject("categoria", categoriaService.buscaPor(id));
+
         return modelAndView;
 	}
 

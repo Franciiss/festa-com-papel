@@ -1,5 +1,9 @@
 package com.festacompapel.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,25 +11,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 @Table(name = "Pedido")
+@DynamicUpdate
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,17 +25,17 @@ public class Pedido implements Serializable {
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_pedido")
+	@Column(name = "data_pedido", updatable=false)
 	private Calendar dataDoPedido;
 
 	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	// @Temporal(TemporalType.DATE)
-	@Column(name = "data_entrega_Pedido")
+	@Column(name = "data_entrega_Pedido", updatable=false)
 	private String dataEntregaPedido;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_entrega_pedido_Calendar")
+	@Column(name = "data_entrega_pedido_Calendar", updatable=false)
 	private Calendar dataEntregaPedidoCalendar;
 
 	@Column(name = "frete_pedido")

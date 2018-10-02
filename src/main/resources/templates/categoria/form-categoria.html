@@ -205,6 +205,8 @@
                               method="post" enctype="multipart/form-data">
 
                             <input type="hidden" name="id" th:value="${categoria.id}"/>
+                            <input type="hidden" name="status" th:value="${categoria.status}"/>
+
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Cadastro de Categorias</h4>
@@ -216,7 +218,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputDescricaoDaCategoria">Descrição</label>
-                                        <input id="inputDescricaoDaCategoria" type="text" class="form-control"
+                                        <input id="inputDescricaoDaCategoria" th:value="${categoria.descricao}" name="descricao" type="text" class="form-control"
                                                placeholder="Descrição da categoria">
                                     </div>
                                     <div class="form-group">

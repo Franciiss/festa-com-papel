@@ -1,5 +1,8 @@
 package com.festacompapel.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -8,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Cliente")
+@DynamicUpdate
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -57,7 +61,9 @@ public class Cliente implements Serializable {
 	@Column(name = "sexo")
     private String sexo;
 
-	@Column(name = "data_cadastro")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+	@Column(name = "data_cadastro", updatable=false)
 	private Date dataCadastro;
 
     @Column(name = "imagem")
@@ -92,6 +98,9 @@ public class Cliente implements Serializable {
         } else {
             this.endereco = this.rua + ", número " + this.numero + ", " + this.bairro;
         }
+
+        this.nomeFormatado = this.nome + " " + this.sobrenome;
+
     }
 
     public long getId() {

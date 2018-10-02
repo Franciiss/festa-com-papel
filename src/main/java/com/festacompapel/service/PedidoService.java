@@ -1,18 +1,16 @@
 package com.festacompapel.service;
 
-import java.util.*;
-
-import javax.transaction.Transactional;
-
-import com.festacompapel.model.Cliente;
-import com.festacompapel.model.StatusBasicos;
+import com.festacompapel.model.Pedido;
 import com.festacompapel.model.StatusPedido;
-import jdk.jfr.events.ExceptionThrownEvent;
+import com.festacompapel.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.festacompapel.model.Pedido;
-import com.festacompapel.repository.PedidoRepository;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PedidoService {
@@ -87,7 +85,7 @@ public class PedidoService {
 
 	@Transactional
 	public int buscarQuantidadeDeVendasDoDia(){
-		return pedidoRepository.buscarQuantidadeDeVendasDoDia();
+		return pedidoRepository.buscarQuantidadeDeVendasDiasAtras(0);
 	}
 
 	@Transactional
@@ -109,5 +107,18 @@ public class PedidoService {
 		} catch (Exception e){
 			return new ArrayList<>();
 		}
+	}
+
+	public int buscarQuantidadeDeVendasDiasAtras(int quantidadeDeDiasAtras){
+		return pedidoRepository.buscarQuantidadeDeVendasDiasAtras(quantidadeDeDiasAtras);
+	}
+
+	public int buscarQuantidadeDeVendasDoMes(){
+		return pedidoRepository.buscarQuantidadeDeVendasDoMes();
+	}
+
+	public Collection<Object> getProdutosFromPedidoId(Long pedidoId){
+		return pedidoRepository.getProdutosFromPedidoId(pedidoId);
+
 	}
 }

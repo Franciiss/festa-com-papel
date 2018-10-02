@@ -33,6 +33,10 @@ public class IndexController {
 
         // ** Diario **
         modelAndView.addObject("quantidadeDeVendasDeHoje", pedidoService.buscarQuantidadeDeVendasDoDia());
+        modelAndView.addObject("valorVendasDeHoje", pedidoService.somaTotalDasVendasDeHoje());
+
+        // ** De Ontem **
+        modelAndView.addObject("quantidadeDeVendasOntem", pedidoService.buscarQuantidadeDeVendasDiasAtras(1));
 
         // ** Semanal **
 
@@ -40,9 +44,12 @@ public class IndexController {
         modelAndView.addObject("quantidadeDePedidoSemanaPassada", pedidoService.buscarTodosOsPedidosDaSemanaPassada());
         modelAndView.addObject("quantidadeDeVendasTotaisConcluidas", pedidoService.findAllContagemByStatus(StatusPedido.CONCLUIDO));
 
+        // ** Mensal **
+
+        modelAndView.addObject("quantidadeVendaEsteMes", pedidoService.buscarQuantidadeDeVendasDoMes());
+
         modelAndView.addObject("pedidosDaSemanaConcluidos", pedidoService.findAllBySemana(StatusPedido.CONCLUIDO));
 
-        modelAndView.addObject("valorVendasDeHoje", pedidoService.somaTotalDasVendasDeHoje());
         try{
             modelAndView.addObject("valorTodasAsVendas", pedidoService.somaTotal(StatusPedido.CONCLUIDO));
         } catch(Exception e){

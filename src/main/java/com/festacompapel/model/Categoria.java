@@ -1,5 +1,8 @@
 package com.festacompapel.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Categoria")
+@DynamicUpdate
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +32,9 @@ public class Categoria implements Serializable {
 	@Column(name = "imagem")
 	private String imagem;
 
-	@Column(name = "data_criacao")
+	@DateTimeFormat(pattern = "dd/MM/yyyy") // This is for bind Date with @ModelAttribute
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_criacao", updatable=false)
 	private Date dataCriacao;
 
 	@Enumerated(EnumType.STRING)

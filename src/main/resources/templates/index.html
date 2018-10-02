@@ -244,7 +244,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-muted mt-3 mb-0">
+                                <p th:text="|Vendas ontem: ${quantidadeDeVendasOntem}|" class="text-muted mt-3 mb-0">
                                     <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Relação de vendas de hoje
                                 </p>
                             </div>
@@ -369,17 +369,17 @@
                                 <h2 class="card-title text-primary mb-5">Histórico de Performance</h2>
                                 <div class="wrapper d-flex justify-content-between">
                                     <div class="side-left">
-                                        <p class="mb-2">Melhor dia</p>
-                                        <p class="display-3 mb-4 font-weight-light">+45.2%</p>
+                                        <p class="mb-2">Vendas da Semana</p>
+                                        <p th:text="${quantidadeVendaEstaSemana}" class="display-3 mb-4 font-weight-light"></p>
                                     </div>
                                     <div class="side-right">
-                                        <small class="text-muted">2017</small>
+                                        <small class="text-muted"></small>
                                     </div>
                                 </div>
                                 <div class="wrapper d-flex justify-content-between">
                                     <div class="side-left">
-                                        <p class="mb-2">Pior dia</p>
-                                        <p class="display-3 mb-5 font-weight-light">-35.3%</p>
+                                        <p class="mb-2">Vendas do Mês</p>
+                                        <p th:text="${quantidadeVendaEsteMes}" class="display-3 mb-5 font-weight-light">-35.3%</p>
                                     </div>
                                     <div class="side-right">
                                         <small class="text-muted">2015</small>
@@ -444,46 +444,29 @@
                                         <thead>
                                         <tr>
                                             <th>
-                                                #
+                                                Cliente
                                             </th>
                                             <th>
-                                                First name
+                                                Progresso
                                             </th>
                                             <th>
-                                                Progress
+                                                Valor Total
                                             </th>
                                             <th>
-                                                Amount
+                                                Data início
                                             </th>
                                             <th>
-                                                Sales
-                                            </th>
-                                            <th>
-                                                Deadline
+                                                Prazo
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="pedido : ${pedidosDaSemanaConcluidos}">
-                                            <td th:text="${pedido.id}" class="font-weight-medium">
-                                            </td>
-                                            <td th:text="${pedido.cliente.nome}">
-                                            </td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                $ 77.99
-                                            </td>
-                                            <td class="text-danger"> 53.64%
-                                                <i class="mdi mdi-arrow-down"></i>
-                                            </td>
-                                            <td>
-                                                May 15, 2015
-                                            </td>
+                                            <td th:text="${pedido.cliente.nome}"></td>
+                                            <td th:text="${pedido.status}"></td>
+                                            <td th:text="${pedido.valorTotal}"></td>
+                                            <td th:text="${pedido.getDataPedidoFormatada()}"></td>
+                                            <td th:text="${pedido.getDataPedidoEntregaFormatada()}"></td>
                                         </tr>
                                         </tbody>
                                     </table>

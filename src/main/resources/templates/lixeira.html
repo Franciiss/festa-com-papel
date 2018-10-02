@@ -221,7 +221,7 @@
                                             <td th:text="${categoria.descricao}">Photoshop</td>
                                             <td>
                                                 <label th:text="${categoria.status}"
-                                                       class="badge badge-success"></label>
+                                                       class="badge badge-danger"></label>
                                             </td>
                                             <td>
                                                 <a th:href="@{/lixeira/restaurar-categoria/{id}(id=${categoria.id})}" style="text-decoration: none">
@@ -271,7 +271,7 @@
 
                                             <td>
                                                 <label th:text="${produto.status}"
-                                                       class="badge badge-success"></label>
+                                                       class="badge badge-danger"></label>
                                             </td>
                                             <td>
                                                 <a th:href="@{/lixeira/restaurar-produto/{id}(id=${produto.id})}" style="text-decoration: none">

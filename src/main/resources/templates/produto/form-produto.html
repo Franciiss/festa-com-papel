@@ -205,6 +205,9 @@
                               method="post" enctype="multipart/form-data">
 
                             <input type="hidden" name="id" th:value="${produto.id}"/>
+                            <input type="hidden" name="status" th:value="${produto.status}"/>
+
+
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Cadastro de Produto</h4>
@@ -216,7 +219,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputDescricaoDoProduto">Descrição</label>
-                                        <input id="inputDescricaoDoProduto" name="descricao" type="text" class="form-control"
+                                        <input id="inputDescricaoDoProduto" name="descricao" th:value="${produto.descricao}" type="text" class="form-control"
                                                placeholder="Descrição do produto">
                                     </div>
                                     <div class="form-group">
@@ -227,7 +230,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input type="number" class="form-control" name="preco"  th:value="${produto.preco}">
+                                            <input type="number" class="form-control" name="preco"  th:value="${produto.preco}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -238,12 +241,12 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input type="number" class="form-control" name="quantidade"  th:value="${produto.quantidade}">
+                                            <input type="number" class="form-control" name="quantidade" required th:value="${produto.quantidade}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="selectCategoria">Categoria</label>
-                                        <select class="form-control" id="selectCategoria" th:field="*{categoria.id}" required>
+                                        <select class="form-control" id="selectCategoria" th:field="${produto.categoria.id}" required>
                                             <optgroup>
                                                 <option th:each="categoria : ${categorias}"
                                                         th:value="${categoria.id}" th:text="${categoria.nome}"></option>

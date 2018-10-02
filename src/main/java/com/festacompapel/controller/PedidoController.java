@@ -139,6 +139,8 @@ public class PedidoController {
 		modelAndView.addObject("carrinho", this.carrinho);
 		modelAndView.addObject("valorTotal", valorTotal);
 		modelAndView.addObject("pedido", pedidoService.buscaPor(id));
+
+		pedidoService.getProdutosFromPedidoId(id);
 		return modelAndView;
 	}
 }

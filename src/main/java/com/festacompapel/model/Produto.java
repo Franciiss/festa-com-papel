@@ -1,5 +1,7 @@
 package com.festacompapel.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -35,7 +37,9 @@ public class Produto implements Serializable {
 	@Column(name = "descricao")
 	private String descricao;
 
-	@Column(name = "data_criacao")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+	@Column(name = "data_criacao", updatable=false)
 	private Date dataCriacao;
 
 	@ManyToOne
@@ -48,10 +52,16 @@ public class Produto implements Serializable {
     private String imagem;
 
 	@PrePersist
-	private void prePersistUpdate() {
+	private void prePersist() {
 	    this.setStatus(StatusBasicos.ATIVO);
 		this.setValorUnitario(this.preco / this.quantidade);
 	}
+
+	@PreUpdate
+    private void preUpdate(){
+        this.setValorUnitario(this.preco / this.quantidade);
+
+    }
 
     public long getId() {
         return id;
@@ -69,11 +79,11 @@ public class Produto implements Serializable {
         this.nome = nome;
     }
 
-    private double getValorUnitario() {
+    public double getValorUnitario() {
         return valorUnitario;
     }
 
-    private void setValorUnitario(double valorUnitario) {
+    public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
