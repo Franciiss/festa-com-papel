@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -23,20 +24,13 @@ public class Pedido implements Serializable {
 	@Column(name = "id")
 	private long id;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Column(name = "data_pedido", updatable=false)
-	private Calendar dataDoPedido;
+	private LocalDateTime dataDoPedido;
 
-	// @DateTimeFormat(pattern = "dd/MM/yyyy")
-	// @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Column(name = "data_entrega_Pedido", updatable=false)
-	private String dataEntregaPedido;
-
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_entrega_pedido_Calendar", updatable=false)
-	private Calendar dataEntregaPedidoCalendar;
+	private LocalDateTime dataEntregaPedido;
 
 	@Column(name = "frete_pedido")
 	private double frete;
@@ -64,26 +58,19 @@ public class Pedido implements Serializable {
 
 	@SuppressWarnings("static-access")
 	@PrePersist
-	@PreUpdate
 	private void prePersistUpdate() {
-		this.dataDoPedido = this.dataDoPedido.getInstance();
-		this.dataEntregaPedidoCalendar = this.formataDataPedidoEntrega();
+		this.dataDoPedido = LocalDateTime.now();
 		this.valorDoDesconto = (this.descontoPedido / 100) * valorPedido;
 		this.status = StatusPedido.NOVO;
 		this.valorTotal = this.valorPedido + this.frete - this.valorDoDesconto;
 	}
 
-	public String getDataPedidoFormatada() {
-		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-		String data = s.format(this.dataDoPedido.getTime());
-		return data;
-	}
+    @PreUpdate
+    public void preUpdate(){
+        this.valorDoDesconto = (this.descontoPedido / 100) * valorPedido;
+        this.valorTotal = this.valorPedido + this.frete - this.valorDoDesconto;
+    }
 
-	public String getDataPedidoEntregaFormatada() {
-		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
-		String data = s.format(this.dataEntregaPedidoCalendar.getTime());
-		return data;
-	}
 
 	public Calendar formataDataPedidoEntrega() {
 		SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
@@ -105,31 +92,23 @@ public class Pedido implements Serializable {
 		this.id = id;
 	}
 
-	public Calendar getDataDoPedido() {
-		return dataDoPedido;
-	}
+    public LocalDateTime getDataDoPedido() {
+        return dataDoPedido;
+    }
 
-	public void setDataDoPedido(Calendar dataDoPedido) {
-		this.dataDoPedido = dataDoPedido;
-	}
+    public void setDataDoPedido(LocalDateTime dataDoPedido) {
+        this.dataDoPedido = dataDoPedido;
+    }
 
-	public String getDataEntregaPedido() {
-		return dataEntregaPedido;
-	}
+    public LocalDateTime getDataEntregaPedido() {
+        return dataEntregaPedido;
+    }
 
-	public void setDataEntregaPedido(String dataEntregaPedido) {
-		this.dataEntregaPedido = dataEntregaPedido;
-	}
+    public void setDataEntregaPedido(LocalDateTime dataEntregaPedido) {
+        this.dataEntregaPedido = dataEntregaPedido;
+    }
 
-	public Calendar getDataEntregaPedidoCalendar() {
-		return dataEntregaPedidoCalendar;
-	}
-
-	public void setDataEntregaPedidoCalendar(Calendar dataEntregaPedidoCalendar) {
-		this.dataEntregaPedidoCalendar = dataEntregaPedidoCalendar;
-	}
-
-	public double getFrete() {
+    public double getFrete() {
 		return frete;
 	}
 

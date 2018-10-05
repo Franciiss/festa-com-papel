@@ -60,7 +60,9 @@ public class Produto implements Serializable {
 	@PreUpdate
     private void preUpdate(){
         this.setValorUnitario(this.preco / this.quantidade);
+    }
 
+    public Produto() {
     }
 
     public long getId() {

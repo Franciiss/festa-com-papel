@@ -17,7 +17,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     Collection<Pedido> findAllBySemana(StatusPedido statusPedido);
 
     @Query(value = "Select pedido_id, produtos_id from pedido_produtos pp where pp.pedido_id = ?1", nativeQuery = true)
-    Collection<Object> getProdutosFromPedidoId(Long pedidoId);
+    Collection<Object[]> getProdutosFromPedidoId(Long pedidoId);
 
     @Query(value = "Select count(*) from Pedido where YEARWEEK(data_pedido, 1) = YEARWEEK(CURDATE(), 1) and status = 'CONCLUIDO'", nativeQuery = true)
     int buscarTodosOsPedidosDaSemana();
@@ -35,6 +35,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Query("Select sum(p.valorPedido) FROM Pedido p where p.status = ?1")
     double somaTotal(StatusPedido statusPedido);
+
+    @Query(value = "Select count(*) from festacompapel.pedido where day(data_pedido) = day(curdate())", nativeQuery = true)
+    int quantidadeDeVendasDeHoje();
 
     @Query(value = "Select sum(valor_pedido) from Pedido where day(data_pedido) = day(curdate())", nativeQuery = true)
     Optional<Double> somaTotalDasVendasPorDia();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head th:insert="fragmentos/fragmentos-layout :: head"></head>
 
@@ -189,6 +189,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
 
         <nav th:insert="fragmentos/fragmentos-menus :: navbarLateral"></nav>
 
@@ -197,185 +198,62 @@
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-12 grid-margin">
-                        <form th:action="@{/form-pedido/adiciona-produto}" th:object="${produto}" method="POST">
-
-                            <h1>Produto</h1>
-                            <div class="form-group">
-                                <select class="form-control" th:field="*{id}">
-                                    <optgroup>
-                                        <option th:each="produto : ${produtos}"
-                                                th:value="${produto.id}"
-                                                th:text="${produto.nome}"></option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12 content-right">
-                                    <button class="btn btn-primary form-btn" type="submit">Adicionar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 grid-margin">
-                            <div class="form-group">
-                                <h1>Produtos Selecionados</h1>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Lista de Clientes</h4>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <thead>
                                         <tr>
+                                            <th>Imagem</th>
                                             <th>Nome</th>
-                                            <th>Quantidade</th>
-                                            <th>Preço</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>Endereço</th>
+                                            <th>Celular</th>
+                                            <th>Telefone</th>
+                                            <th>Email</th>
+                                            <th>Comandos</th>
                                         </tr>
                                         </thead>
-                                        <th:block th:each="produtoCarrinho : ${carrinho}">
-                                            <tr>
-                                                <td th:text="${produtoCarrinho.nome}"></td>
-                                                <td th:text="${produtoCarrinho.quantidade}"></td>
-                                                <td th:text="${produtoCarrinho.preco}"></td>
-                                                <td></td>
-                                                <td>
-                                                    <form method="POST"
-                                                          th:action="@{/form-pedido/remover/{id}(id=${produtoCarrinho.id})}">
-                                                        <button type="submit" style="color: red">X</button>
-                                                    </form>
-                                            </tr>
-                                        </th:block>
+                                        <tbody>
+                                        <tr th:each="cliente : ${clientes}">
+                                            <td>
+                                                <img data-th-src="@{|${cliente.imagem}|}"/>
+                                            </td>
+                                            <td th:text="${cliente.nomeFormatado}"></td>
+                                            <td th:text="${cliente.endereco}"></td>
+                                            <td th:text="${cliente.celular}"></td>
+                                            <td th:text="${cliente.telefone}"></td>
+                                            <td th:text="${cliente.email}"></td>
+                                            <td>
+                                                <a th:href="@{/cliente/edicao/{id}(id=${cliente.id})}"
+                                                   style="text-decoration: none">
+                                                    <button class="btn btn-success">Editar
+                                                    </button>
+                                                </a>
+                                                <a th:href="@{/cliente/remover/{id}(id=${cliente.id})}"
+                                                   style="text-decoration: none">
+                                                    <button class="btn btn-danger">Excluir
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
-
-
-                            <form th:action="@{/salva-pedido}" th:object="${pedido}" method="post">
-
-                                <input type="hidden" name="id" th:value="${pedido.id}"/>
-
-                                <div class="container profile profile-view" id="profile">
-                                    <div class="form-row profile-row">
-                                        <div class="col-md-8 col-lg-12 offset-lg-0">
-                                            <h1>Pedido</h1>
-                                            <hr>
-                                            <div class="form-group">
-                                                <label>Cliente</label>
-                                                <select class="form-control"
-                                                        th:field="*{cliente.id}">
-                                                    <optgroup>
-                                                        <option th:each="cliente : ${clientes}"
-                                                                th:value="${cliente.id}"
-                                                                th:text="${cliente.nome}"></option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-
-                                            <hr>
-                                            <div class="form-row">
-                                                <div class="col-sm-12 col-md-2">
-                                                    <div class="form-group">
-                                                        <label>Desconto</label><input class="form-control"
-                                                                                      name="descontoPedido"
-                                                                                      id="campoDesconto"
-                                                                                      th:value="${pedido.descontoPedido}"
-                                                                                      type="number"
-                                                                                      onChange="calculaDesconto(this.value)">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <script>
-                                                function calculaDesconto(val) {
-                                                    var valorSemDesconto = document.getElementById("valorSemDesconto").innerHTML;
-                                                    if (val > 100) {
-                                                        alert("NÃO SE DÁ DESCONTO MAIOR QUE 100%");
-                                                        document.getElementById("campoDesconto").innerHTML = 0;
-                                                        location.reload(true);
-                                                    } else {
-                                                        var desconto = (val / 100) * valorSemDesconto;
-                                                        var valorComDesconto = valorSemDesconto - desconto;
-                                                        document.getElementById("ValorDoDesconto").innerHTML = desconto;
-                                                        document.getElementById("valorTotal").innerHTML = valorComDesconto;
-                                                    }
-                                                }
-                                            </script>
-
-                                            <div class="form-row">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label><strong>SubTotal</strong></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label th:text="${pedido.valorTotal}" id=""
-                                                               class="float-right">XXXX</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label><strong>Desconto</strong></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label id="ValorDoDesconto" class="float-right"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label><strong>Total</strong></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label id="valorTotal" class="float-right"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Data de Entrega</label><input class="form-control"
-                                                                                             name="dataEntregaPedido"
-                                                                                             th:value="${pedido.dataEntregaPedido}"
-                                                                                             type="datetime-local" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Valor do frete:</label><input class="form-control"
-                                                                                             th:value="${pedido.frete}"
-                                                                                             type="text" name="frete">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-12 content-right">
-                                                    <button class="btn btn-primary form-btn" type="submit">Salvar
-                                                    </button>
-                                                    <button class="btn btn-danger form-btn" type="reset">Limpar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
                         </div>
                     </div>
                 </div>
-
-
             </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
             <div th:insert="fragmentos/fragmentos-footer :: footer"></div>
+
+            <!-- partial -->
         </div>
+        <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
 </div>
 
 <div th:insert="fragmentos/fragmentos-layout :: scripts"></div>

@@ -53,6 +53,11 @@ public class PedidoService {
 		}
 	}
 
+	public void alterarStatus(Long id, StatusPedido statusPedido){
+		Pedido pedido = this.buscaPor(id);
+		pedido.setStatus(statusPedido);
+	}
+
     @Transactional
     public double somaTotal(StatusPedido statusPedido) {
 		try{
@@ -117,8 +122,11 @@ public class PedidoService {
 		return pedidoRepository.buscarQuantidadeDeVendasDoMes();
 	}
 
-	public Collection<Object> getProdutosFromPedidoId(Long pedidoId){
+	public Collection<Object[]> getProdutosFromPedidoId(Long pedidoId){
 		return pedidoRepository.getProdutosFromPedidoId(pedidoId);
+	}
 
+	public int quantidadeDeVendasDeHoje(){
+		return pedidoRepository.quantidadeDeVendasDeHoje();
 	}
 }

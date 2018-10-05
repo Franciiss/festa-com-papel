@@ -46,7 +46,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                                <img src="../static/img/faces/face4.jpg" th:src="@{~/img/faces/face4.jpg}" alt="image" class="profile-pic">
                             </div>
                             <div class="preview-item-content flex-grow">
                                 <h6 class="preview-subject ellipsis font-weight-medium text-dark">David Grey
@@ -74,7 +74,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                                <img src="../static/img/faces/face3.jpg" th:src="@{~img/faces/face3.jpg}" alt="image" class="profile-pic">
                             </div>
                             <div class="preview-item-content flex-grow">
                                 <h6 class="preview-subject ellipsis font-weight-medium text-dark"> Johnson
@@ -144,8 +144,8 @@
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-block">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-text">Hello, Richard V.Welsh !</span>
-                        <img class="img-xs rounded-circle" src="images/faces/face1.jpg" alt="Profile image">
+                        <span class="profile-text">Olá, Neldeci !</span>
+                        <img class="img-xs rounded-circle" src="../static/img/faces/face1.jpg" th:src="@{~/img/faces/face1.jpg}" alt="Profile image">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <a class="dropdown-item p-0">
@@ -162,16 +162,16 @@
                             </div>
                         </a>
                         <a class="dropdown-item mt-2">
-                            Manage Accounts
+                            Gerenciar Contas
                         </a>
                         <a class="dropdown-item">
-                            Change Password
+                            Alterar Senha
                         </a>
                         <a class="dropdown-item">
-                            Check Inbox
+                            Ver Inbox
                         </a>
                         <a class="dropdown-item">
-                            Sign Out
+                            Sair
                         </a>
                     </div>
                 </li>

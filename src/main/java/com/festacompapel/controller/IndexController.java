@@ -32,7 +32,7 @@ public class IndexController {
         // Pedidos
 
         // ** Diario **
-        modelAndView.addObject("quantidadeDeVendasDeHoje", pedidoService.buscarQuantidadeDeVendasDoDia());
+        modelAndView.addObject("quantidadeDeVendasDeHoje", pedidoService.quantidadeDeVendasDeHoje());
         modelAndView.addObject("valorVendasDeHoje", pedidoService.somaTotalDasVendasDeHoje());
 
         // ** De Ontem **
