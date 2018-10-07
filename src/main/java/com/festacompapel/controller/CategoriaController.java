@@ -4,7 +4,10 @@ import com.festacompapel.com.festacompapel.util.CloudinaryConfig;
 import com.festacompapel.model.Categoria;
 import com.festacompapel.model.StatusBasicos;
 import com.festacompapel.service.CategoriaService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +35,7 @@ public class CategoriaController {
 		this.cloudinary = cloudinary;
 	}
 
+
 	@RequestMapping(value = "/form-categoria", method = RequestMethod.GET)
 	public ModelAndView formCategoria(Categoria categoria, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(FORM_CATEGORIA);
@@ -44,6 +48,7 @@ public class CategoriaController {
 		modelAndView.addObject("categorias", categoriaService.findAllByStatus(StatusBasicos.ATIVO));
 		return modelAndView;
 	}
+
 
 	@RequestMapping(value = "/form-categoria/salva", method = RequestMethod.POST)
 	public String postFormulario(@Valid Categoria categoria, BindingResult bindingResult, @RequestParam(value = "arquivo", required = false) MultipartFile arquivo, HttpServletRequest request){

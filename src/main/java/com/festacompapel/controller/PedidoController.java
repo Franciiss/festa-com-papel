@@ -110,8 +110,6 @@ public class PedidoController {
 
         model.addAttribute("carrinho", new ArrayList<Produto>());
 
-        httpSession.invalidate();
-
 		return "redirect:/lista-pedidos";
 	}
 
