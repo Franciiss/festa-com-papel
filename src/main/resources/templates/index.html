@@ -31,10 +31,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--
-                            <p class="text-muted mt-3 mb-0">
-                                <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
-                            </p>-->
+                                <p th:text="'Rendimento do dia: ' + ${valorVendasDeHoje} + ' R$'"
+                                   class="text-muted mt-3 mb-0">
+                                    <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -47,20 +48,22 @@
                                         <i class="mdi mdi-receipt text-warning icon-lg"></i>
                                     </div>
                                     <div class="float-right">
-                                        <p class="mb-0 text-right">Pedidos totais</p>
+                                        <p class="mb-0 text-right">Pedidos da semana (Concluídos)</p>
                                         <div class="fluid-container">
-                                            <h3 th:text="${quantidadeDeVendasTotaisConcluidas} "
+                                            <h3 th:text="${quantidadeVendaEstaSemanaConcluidas} "
                                                 class="font-weight-medium text-right mb-0"></h3>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-muted mt-3 mb-0">
-                                    <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>
-                                    Relação de todas as vendas
+                                <p th:text="|Vendas da semana: ${quantidadePedidosDaSemana}|"
+                                   class="text-muted mt-3 mb-0">
+                                    <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>
+                                    Relação de vendas de hoje
                                 </p>
                             </div>
                         </div>
                     </div>
+
                     <div
                             class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
                         <div class="card card-statistics">
@@ -231,25 +234,33 @@
                     <div class="col-lg-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Pedidos</h4>
+                                <h4 class="card-title">Pedidos da Semana</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Cliente</th>
                                             <th>Progresso</th>
                                             <th>Valor Total</th>
-                                            <th>Data início</th>
-                                            <th>Prazo</th>
+                                            <th>Data do Pedido</th>
+                                            <th>Prazo de Entrega</th>
+                                            <th>Comandos</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="pedido : ${pedidosDaSemanaConcluidos}">
+                                        <tr th:each="pedido : ${pedidosDaSemana}">
+                                            <td th:text="${pedido.id}"></td>
                                             <td th:text="${pedido.cliente.nome}"></td>
                                             <td th:text="${pedido.status}"></td>
                                             <td th:text="${pedido.valorTotal}"></td>
-                                            <td th:text="${pedido.getDataPedidoFormatada()}"></td>
-                                            <td th:text="${pedido.getDataPedidoEntregaFormatada()}"></td>
+                                            <td th:text="${#temporals.format(pedido.dataDoPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                                            <td th:text="${#temporals.format(pedido.dataEntregaPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                                            <td><a th:href="@{/pedido/edicao/{id}(id=${pedido.id})}"
+                                                   class="btn btn-info btn-sm">Ver</a>
+                                                <a th:href="@{/pedido/concluir-pedido/{id}(id=${pedido.id})}"
+                                                   class="btn btn-info btn-sm">Concluir</a>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>

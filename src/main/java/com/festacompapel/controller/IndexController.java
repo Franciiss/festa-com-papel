@@ -33,25 +33,27 @@ public class IndexController {
 
         // ** Diario **
         modelAndView.addObject("quantidadeDeVendasDeHoje", pedidoService.quantidadeDeVendasDeHoje());
-        modelAndView.addObject("valorVendasDeHoje", pedidoService.somaTotalDasVendasDeHoje());
+        modelAndView.addObject("valorVendasDeHoje", pedidoService.somaTotalDeHoje());
 
         // ** De Ontem **
         modelAndView.addObject("quantidadeDeVendasOntem", pedidoService.buscarQuantidadeDeVendasDiasAtras(1));
 
         // ** Semanal **
 
-        modelAndView.addObject("quantidadeVendaEstaSemana", pedidoService.buscarTodosOsPedidosDaSemana());
+        modelAndView.addObject("quantidadeVendaEstaSemanaConcluidas", pedidoService.buscarTodosOsPedidosDaSemanaConcluidos());
+        modelAndView.addObject("quantidadePedidosDaSemana", pedidoService.buscarTodosOsPedidosDaSemana());
+
         modelAndView.addObject("quantidadeDePedidoSemanaPassada", pedidoService.buscarTodosOsPedidosDaSemanaPassada());
-        modelAndView.addObject("quantidadeDeVendasTotaisConcluidas", pedidoService.findAllContagemByStatus(StatusPedido.CONCLUIDO));
+        modelAndView.addObject("quantidadeDeVendasTotaisConcluidas", pedidoService.buscarContagemDeTodosOsPedidosFeitos());
 
         // ** Mensal **
 
         modelAndView.addObject("quantidadeVendaEsteMes", pedidoService.buscarQuantidadeDeVendasDoMes());
 
-        modelAndView.addObject("pedidosDaSemanaConcluidos", pedidoService.findAllBySemana(StatusPedido.CONCLUIDO));
+        modelAndView.addObject("pedidosDaSemana", pedidoService.findAllByStatus(StatusPedido.NOVO));
 
         try{
-            modelAndView.addObject("valorTodasAsVendas", pedidoService.somaTotal(StatusPedido.CONCLUIDO));
+            modelAndView.addObject("valorTodasAsVendas", pedidoService.somaTotal(StatusPedido.NOVO));
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -60,9 +62,6 @@ public class IndexController {
 
         modelAndView.addObject("quantidadeClientesEstaSemana", clienteService.buscarTodosOsClientesDaSemana());
         modelAndView.addObject("quantidadeDeClientesSemanaPassada", clienteService.buscarTodosOsClientesDaSemanaPassada());
-
-
-
 
         return modelAndView;
     }

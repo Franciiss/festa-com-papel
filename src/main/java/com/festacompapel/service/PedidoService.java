@@ -58,10 +58,16 @@ public class PedidoService {
 		pedido.setStatus(statusPedido);
 	}
 
+	public void concluirPedido(Long id){
+		Pedido pedido = this.buscaPor(id);
+		pedido.setStatus(StatusPedido.CONCLUIDO);
+		this.salva(pedido);
+	}
+
     @Transactional
     public double somaTotal(StatusPedido statusPedido) {
 		try{
-			double somaTotal = pedidoRepository.somaTotal(statusPedido);
+			double somaTotal = pedidoRepository.somaTotal();
 			return somaTotal;
 		} catch (Exception e){
 			return 0;
@@ -74,14 +80,19 @@ public class PedidoService {
     }
 
     @Transactional
-    public int findAllContagemByStatus(StatusPedido statusPedido){
-        return 0;
+    public int buscarContagemDeTodosOsPedidosFeitos(){
+        return pedidoRepository.buscarContagemDeTodosOsPedidosFeitos();
     }
 
 	@Transactional
-	public int buscarTodosOsPedidosDaSemana() {
-		return pedidoRepository.buscarTodosOsPedidosDaSemana();
+	public int buscarTodosOsPedidosDaSemanaConcluidos() {
+		return pedidoRepository.buscarTodosOsPedidosDaSemanaConcluidos();
 	}
+
+	@Transactional
+    public int buscarTodosOsPedidosDaSemana(){
+	    return pedidoRepository.buscarTodosOsPedidosDaSemana();
+    }
 
 	@Transactional
 	public int buscarTodosOsPedidosDaSemanaPassada(){
@@ -107,8 +118,7 @@ public class PedidoService {
 	public Collection<Pedido> findAllBySemana(StatusPedido statusPedido) {
 
 		try{
-			Collection<Pedido> pedidos = pedidoRepository.findAllBySemana(statusPedido);
-			return pedidos;
+			return pedidoRepository.findAllBySemana(statusPedido);
 		} catch (Exception e){
 			return new ArrayList<>();
 		}
@@ -117,6 +127,10 @@ public class PedidoService {
 	public int buscarQuantidadeDeVendasDiasAtras(int quantidadeDeDiasAtras){
 		return pedidoRepository.buscarQuantidadeDeVendasDiasAtras(quantidadeDeDiasAtras);
 	}
+
+	public double somaTotalDeHoje(){
+	    return pedidoRepository.somaTotalDeHoje(StatusPedido.CONCLUIDO);
+    }
 
 	public int buscarQuantidadeDeVendasDoMes(){
 		return pedidoRepository.buscarQuantidadeDeVendasDoMes();

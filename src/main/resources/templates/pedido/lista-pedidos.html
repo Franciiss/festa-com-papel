@@ -33,6 +33,7 @@
 											<th>Data de Entrega</th>
 											<th>Valor Total</th>
 											<th>Status</th>
+                                           <th></th>
 										</tr>
 										</thead>
 										<tbody>
@@ -43,13 +44,13 @@
 											<td th:text="${#temporals.format(pedido.dataEntregaPedido, 'dd/MM/yyyy HH:mm')}"></td>
 											<td th:text="${pedido.valorTotal}"></td>
 											<td th:text="${pedido.status}"></td>
-											<th><a th:href="@{/pedido/edicao/{id}(id=${pedido.id})}"
+											<td><a th:href="@{/pedido/edicao/{id}(id=${pedido.id})}"
 												   class="btn btn-info btn-sm">Ver</a>
 												<a th:href="@{/pedido/alterar-status/{id}(id=${pedido.id})}"
 												   class="btn btn-info btn-sm">Alterar Status</a>
 												<a th:href="@{/pedido/remover/{id}(id=${pedido.id})}"
 												   class="btn btn-info btn-danger">Excluir</a>
-											</th>
+                                            </td>
 										</tr>
 										</tbody>
 									</table>

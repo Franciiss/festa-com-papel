@@ -99,6 +99,10 @@ public class PedidoController {
 	public String postFormulario(@Valid Pedido pedido, Model model,
                                  BindingResult bindingResult, HttpSession httpSession) {
 
+        if (bindingResult.hasErrors()) {
+            return FORM_PEDIDO;
+        }
+
 		pedido.setProdutos((List<Produto>) httpSession.getAttribute("carrinho"));
 		pedido.setValorPedido(this.getValorTotal((List<Produto>) httpSession.getAttribute("carrinho")));
 
@@ -175,6 +179,14 @@ public class PedidoController {
     public String excluirPedido(@PathVariable("id") Pedido pedido) {
         pedidoService.delete(pedido);
         return "redirect:/lista-pedidos";
+    }
+
+    @RequestMapping(value = "/pedido/concluir-pedido/{id}", method = RequestMethod.GET)
+    public String excluirProduto(@PathVariable("id") Long id) {
+
+        pedidoService.concluirPedido(id);
+
+        return "redirect:/";
     }
 
 }
