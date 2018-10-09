@@ -31,29 +31,29 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query(value = "Select count(*) from Pedido where WEEKOFYEAR(data_pedido)=WEEKOFYEAR(NOW())-1", nativeQuery = true)
     int buscarTodosOsPedidosDaSemanaPassada();
 
-    @Query(value = "Select count(*) from festacompapel.pedido where day(data_pedido) = day(data_pedido) - ?1", nativeQuery = true)
+    @Query(value = "Select count(*) from Pedido where day(data_pedido) = day(data_pedido) - ?1", nativeQuery = true)
     int buscarQuantidadeDeVendasDiasAtras(int quantidadeDeDias);
 
-    @Query(value = "Select count(*) from pedido p where p.status = ?1", nativeQuery = true)
+    @Query(value = "Select count(*) from Pedido p where p.status = ?1", nativeQuery = true)
     int findAllContagemByStatus(StatusPedido statusPedido);
 
-    @Query(value = "SELECT count(*) FROM festacompapel.pedido\n" +
+    @Query(value = "SELECT count(*) FROM pedido\n" +
             "WHERE YEAR(data_pedido) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) " +
             "AND MONTH(data_pedido) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)", nativeQuery = true)
     int buscarQuantidadeDeVendasDoMes();
 
-    @Query("Select sum(p.valorPedido) FROM Pedido p where p.status = ?1")
+    @Query(value = "Select sum(valor_pedido) FROM Pedido where status = ?1", nativeQuery = true)
     double somaTotal(StatusPedido statusPedido);
 
-    @Query("Select sum(p.valorPedido) FROM Pedido p")
-    double somaTotal();
+    @Query(value = "Select sum(valor_pedido) FROM Pedido", nativeQuery = true)
+    float somaTotal();
 
-    @Query(value = "Select sum(p.valorPedido) FROM Pedido p where p.status = ?1 and p.dataDoPedido = day(data_pedido)", nativeQuery = true)
-    double somaTotalDeHoje(StatusPedido statusPedido);
+    @Query(value = "Select sum(valor_pedido) FROM Pedido where status = ?1 and data_pedido = day(data_pedido)", nativeQuery = true)
+    float somaTotalDeHoje(StatusPedido statusPedido);
 
-    @Query(value = "Select count(*) from festacompapel.pedido where day(data_pedido) = day(curdate())", nativeQuery = true)
+    @Query(value = "Select count(*) from pedido where day(data_pedido) = day(curdate())", nativeQuery = true)
     int quantidadeDeVendasDeHoje();
 
     @Query(value = "Select sum(valor_pedido) from Pedido where day(data_pedido) = day(curdate())", nativeQuery = true)
-    Optional<Double> somaTotalDasVendasPorDia();
+    Optional<Float> somaTotalDasVendasPorDia();
 }

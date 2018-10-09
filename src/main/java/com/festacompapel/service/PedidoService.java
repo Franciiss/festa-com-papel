@@ -65,9 +65,9 @@ public class PedidoService {
 	}
 
     @Transactional
-    public double somaTotal(StatusPedido statusPedido) {
+    public float somaTotal(StatusPedido statusPedido) {
 		try{
-			double somaTotal = pedidoRepository.somaTotal();
+			float somaTotal = pedidoRepository.somaTotal();
 			return somaTotal;
 		} catch (Exception e){
 			return 0;
@@ -105,10 +105,10 @@ public class PedidoService {
 	}
 
 	@Transactional
-	public double somaTotalDasVendasDeHoje(){
+	public float somaTotalDasVendasDeHoje(){
 
 		try{
-			double somaTotalDasVendasHoje = pedidoRepository.somaTotalDasVendasPorDia().get();
+			float somaTotalDasVendasHoje = pedidoRepository.somaTotalDasVendasPorDia().get();
 			return somaTotalDasVendasHoje;
 		} catch (Exception e){
 			return 0;
@@ -128,8 +128,14 @@ public class PedidoService {
 		return pedidoRepository.buscarQuantidadeDeVendasDiasAtras(quantidadeDeDiasAtras);
 	}
 
-	public double somaTotalDeHoje(){
-	    return pedidoRepository.somaTotalDeHoje(StatusPedido.CONCLUIDO);
+	public float somaTotalDeHoje(){
+
+		try{
+			return pedidoRepository.somaTotalDeHoje(StatusPedido.CONCLUIDO);
+		} catch (Exception e){
+			return 0;
+		}
+
     }
 
 	public int buscarQuantidadeDeVendasDoMes(){
